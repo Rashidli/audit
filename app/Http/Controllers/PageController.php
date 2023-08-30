@@ -31,5 +31,4 @@ class PageController extends Controller
 
     }
 
-
 }

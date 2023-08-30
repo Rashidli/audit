@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Settings\ActivityAreaController;
 use App\Http\Controllers\Settings\BankController;
 use App\Http\Controllers\Settings\CompanyCategoryController;
@@ -53,8 +54,8 @@ Route::group(['middleware' =>'auth'], function (){
     Route::resource('roles',RoleController::class);
     Route::resource('permissions',PermissionController::class);
     Route::resource('customers',CustomerController::class);
+    Route::resource('orders',OrderController::class);
 
-
-
+    Route::post('/import_excel',[OrderController::class,'import_excel'])->name('import_excel');
 
 });
