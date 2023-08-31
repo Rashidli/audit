@@ -27,10 +27,13 @@
 <script src="{{asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
 
 <script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>
-
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <!-- App js -->
 <script src="{{asset('assets/js/app.js')}}"></script>
 <script src="{{asset('assets/js/select2.js')}}"></script>
+
+
 <script>
 
     $(document).ready(function (){
@@ -58,6 +61,45 @@
             });
 
         });
+
+
+
+
+    });
+
+    $(function () {
+        $(document).ready(function () {
+            $('#fileUploadForm').ajaxForm({
+                beforeSend: function () {
+                    var percentage = '0';
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+                    $('.progress_button').css('pointer-events','none');
+                    $('.progress_display').css('display','block');
+                    var percentage = percentComplete;
+                    $('.progress .progress-bar').css("width", percentage+'%', function() {
+                        return $(this).attr("aria-valuenow", percentage) + "%";
+                    })
+                    localStorage.setItem("reloadAfterPageLoad", true);
+
+                    console.log(localStorage.getItem("reloadAfterPageLoad"))
+                },
+                complete: function (xhr) {
+
+                    sessionStorage.setItem('showSuccess', 'true');
+                    window.location.reload();
+
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+
+        if (sessionStorage.getItem('showSuccess')) {
+            $('#successMessage').fadeIn();
+            sessionStorage.removeItem('showSuccess');
+        }
+
     });
 </script>
 </body>

@@ -13,43 +13,31 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            // main info
-            $table->string('company_name');
-            $table->string('company_voen');
-            $table->string('company_area');
-            $table->string('company_phone');
-            $table->string('main_address');
-            $table->boolean('is_active')->default(true);
-
-            // bank info
-            $table->string('bank_branch');
-            $table->string('bank_voen');
-            $table->string('bank_swift');
-            $table->string('bank_iban');
-            $table->string('bank_code');
-
-            // company info
-            $table->string('company_cat');
-            $table->integer('company_count_employee');
-            $table->string('company_address');
-            $table->string('company_return');
-            $table->string('company_type');
-
-            // contract info
-            $table->string('contract_name');
-            $table->string('contract_curator');
-            $table->string('contract_date');
-            $table->string('contract_number');
-            $table->string('contract_end_date');
-            $table->string('contract_file');
-
-            // responsible person
-            $table->string('person_name');
-            $table->string('person_phone');
-            $table->string('person_address');
-            $table->string('person_filial');
-            $table->string('person_email');
-            
+            $table->string('order_date');
+            $table->string('order_id');
+            $table->string('service_type');
+            $table->string('phone_2');
+            $table->string('service_note');
+            $table->string('call_date');
+            $table->string('order_end_date');
+            $table->string('customer_name');
+            $table->string('phone');
+            $table->string('corporate');
+            $table->string('operator');
+            $table->string('order_status');
+            $table->string('oz_tutma');
+            $table->string('amount');
+            $table->string('driver');
+            $table->string('reason_of_cancel');
+            $table->string('driver_amount');
+            $table->string('master');
+            $table->string('worker');
+            $table->string('additional_service');
+            $table->string('department');
+            $table->string('satisfaction_status');
+            $table->string('address');
+            $table->string('speaking');
+            $table->string('note');
             $table->timestamps();
             $table->softDeletes();
         });

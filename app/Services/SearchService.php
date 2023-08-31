@@ -18,7 +18,7 @@ class SearchService
             $query->where('is_active', $is_active);
         }
         if($date){
-            $query->whereDate('created_at', '=', $date);
+            $query->whereDate('order_date', '=', $date);
         }
 
 

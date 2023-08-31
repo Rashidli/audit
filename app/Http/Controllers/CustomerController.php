@@ -41,8 +41,6 @@ class CustomerController extends Controller
 
         $route = 'customers.index';
 
-
-
         return view('customers.index', compact('data','route'));
 
     }
