@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,8 +36,11 @@ class UserController extends Controller
 
     public function create()
     {
+
         $roles = Role::all();
-        return view('users.create', compact('roles'));
+        $groups = Group::all();
+        return view('users.create', compact('roles','groups'));
+
     }
 
     /**
@@ -45,12 +49,14 @@ class UserController extends Controller
 
     public function store(RegisterRequest $request)
     {
+        $user = new User();
 
-        $user = new User([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-        ]);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        if($request->group_id){
+            $user->group_id = $request->group_id;
+        }
 
         $user->assignRole($request->role);
 

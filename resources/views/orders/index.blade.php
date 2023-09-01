@@ -16,7 +16,7 @@
                                             <div class="col-4">
                                                 <div class="mb-3">
                                                     <label class=" col-form-label">Fayl</label>
-                                                    <input value="{{old('file')}}" class="form-control" type="file" name="file">
+                                                    <input value="{{old('file')}}" id="fileInput" class="form-control" type="file" name="file">
                                                     @if($errors->first('file')) <small class="form-text text-danger">{{$errors->first('file')}}</small> @endif
                                                 </div>
                                                 <div class="progress_display form-group">
@@ -26,14 +26,16 @@
                                                 </div>
 
                                                 <div id="successMessage" class="progress_success alert alert-success">File yükləndi.</div>
+{{--                                                <div id="errorMessage" class="alert alert-danger"></div>--}}
                                                 <div class="mb-3">
-                                                    <button class="btn progress_button btn-primary">Import et</button>
+                                                    <button type="submit" class="btn progress_button btn-primary">Import et</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 <h4 class="card-title">Sifarişlər</h4>
-                                <a href="{{route('orders.create')}}" class="btn btn-primary">+</a>
+                                <a href="{{route('orders.create')}}" class="btn btn-primary">+</a><br>
+                                <a href="{{route('share_orders')}}" class="btn btn-primary">Sifarişləri paylaşdır</a>
                                 <br>
                                 <br>
 
@@ -56,7 +58,7 @@
                                         <tbody id="results">
                                         @foreach($data['items'] as $order)
                                             <tr>
-                                                <th scope="row">{{$order->order_number}}</th>
+                                                <th scope="row">{{$order->id}}</th>
                                                 <td>{{$order->order_date}}</td>
                                                 <td>{{$order->order_id}}</td>
                                                 <td>{{$order->service_type}}</td>

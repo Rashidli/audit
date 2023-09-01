@@ -21,12 +21,22 @@
                                         @if($errors->first('name')) <small class="form-text text-danger">{{$errors->first('name')}}</small> @endif
                                     </div>
 
-
                                     <!-- end row -->
                                     <div class="mb-3">
                                         <label for="example-search-input" class="col-form-label">Password</label>
                                         <input class="form-control" type="password" name="password" id="example-search-input">
                                         @if($errors->first('password')) <small class="form-text text-danger">{{$errors->first('password')}}</small> @endif
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="col-form-label">Qrupun seçin</label>
+                                        <select class="form-control" type="text" name="group_id">
+                                            <option selected disabled>--seçin--</option>
+                                            @foreach($groups as $group)
+                                                <option value="{{$group->id}}">{{$group->title}}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->first('group_id')) <small class="form-text text-danger">{{$errors->first('group_id')}}</small> @endif
                                     </div>
 
                                     @foreach($roles as $role)
@@ -35,6 +45,8 @@
                                         <label for="{{$role->id}}">{{$role->name}}</label><br>
 
                                     @endforeach
+
+
 
                                     <div class="mb-3">
                                         <button class="btn btn-primary">Submit</button>

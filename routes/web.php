@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ActController;
+use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DistributeController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Settings\ActivityAreaController;
 use App\Http\Controllers\Settings\BankController;
@@ -55,7 +58,13 @@ Route::group(['middleware' =>'auth'], function (){
     Route::resource('permissions',PermissionController::class);
     Route::resource('customers',CustomerController::class);
     Route::resource('orders',OrderController::class);
+    Route::resource('groups',GroupController::class);
+    Route::resource('auditors',AuditorController::class);
 
     Route::post('/import_excel',[OrderController::class,'import_excel'])->name('import_excel');
+
+    Route::get('/distributeNewOrders', [DistributeController::class,'distributeNewOrders'])->name('distributeNewOrders');
+
+    Route::get('/share_orders',[PageController::class,'share_orders'])->name('share_orders');
 
 });

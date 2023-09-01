@@ -10,17 +10,16 @@ class SearchService
 
         $query = DB::table($table)->where('deleted_at',  NULL);
         $limit = $request->input('limit', 10);
-        $is_active = $request->input('is_active');
+        $is_new = $request->input('is_new');
         $date = $request->input('date');
         $text = $request->input('text');
 
-        if($is_active != null){
-            $query->where('is_active', $is_active);
+        if($is_new != null){
+            $query->where('is_new', $is_new);
         }
         if($date){
             $query->whereDate('order_date', '=', $date);
         }
-
 
         if ($text) {
 
@@ -31,7 +30,6 @@ class SearchService
                     $query->orWhere($column, 'LIKE', '%' . $text . '%');
                 }
             });
-
 
         }
 

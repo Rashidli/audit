@@ -69,29 +69,73 @@
 
     $(function () {
         $(document).ready(function () {
+
             $('#fileUploadForm').ajaxForm({
+
+                beforeSubmit: function (formData, jqForm, options) {
+
+                    if (!isValidFile()) {
+                        return false;
+                    }
+                    return true;
+
+                },
+
                 beforeSend: function () {
+
                     var percentage = '0';
-                },
-                uploadProgress: function (event, position, total, percentComplete) {
-                    $('.progress_button').css('pointer-events','none');
-                    $('.progress_display').css('display','block');
-                    var percentage = percentComplete;
-                    $('.progress .progress-bar').css("width", percentage+'%', function() {
-                        return $(this).attr("aria-valuenow", percentage) + "%";
-                    })
-                    localStorage.setItem("reloadAfterPageLoad", true);
 
-                    console.log(localStorage.getItem("reloadAfterPageLoad"))
                 },
+
                 complete: function (xhr) {
+                    if (xhr.status === 200) {
+                        sessionStorage.setItem('showSuccess', 'true');
+                        location.reload();
+                    }
+                },
 
-                    sessionStorage.setItem('showSuccess', 'true');
-                    window.location.reload();
 
-                }
+                uploadProgress: function (event, position, total, percentComplete){
+
+                    if (isValidFile()) {
+
+                        $('.progress_button').css('pointer-events','none');
+                        $('.progress_display').css('display','block');
+                        var percentage = percentComplete;
+                        $('.progress .progress-bar').css("width", percentage+'%', function() {
+                            return $(this).attr("aria-valuenow", percentage) + "%";
+                        })
+
+                    }
+
+                },
+
+
             });
+
+
         });
+        function isValidFile() {
+
+            var fileInput = $('#fileInput');
+            var file = fileInput[0].files[0];
+
+            if (!file) {
+                alert('Please select a file to upload.');
+                return false;
+            }
+
+
+            var allowedExtensions = ['xlsx', 'xltx', 'xls', 'xlsb', 'xlsm'];
+            var fileExtension = file.name.split('.').pop().toLowerCase();
+
+            if ($.inArray(fileExtension, allowedExtensions) === -1) {
+                alert('Invalid file type. Please select a valid file.');
+                return false;
+            }
+
+            return true;
+        }
     });
     $(document).ready(function() {
 

@@ -22,10 +22,10 @@
         <div class="col-2">
             <div class="mb-3">
                 <label class=" col-form-label">Status</label>
-                <select class="form-control" id="is_active" type="text" name="is_active">
+                <select class="form-control" id="is_active" type="text" name="is_new">
                     <option selected value="">---</option>
-                    <option value="1" {{ request()->is_active == 1 ? 'selected' : '' }}>Active</option>
-                    <option value="0" {{ request()->is_active == 0 && request()->is_active != null ? 'selected' : '' }}>Deactive</option>
+                    <option value="1" {{ request()->is_new == 1 ? 'selected' : '' }}>Yeni</option>
+                    <option value="0" {{ request()->is_new == 0 && request()->is_new != null ? 'selected' : '' }}>Paylanmışlar</option>
                 </select>
             </div>
         </div>

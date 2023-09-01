@@ -178,6 +178,17 @@
                         </ul>
                     </li>
 
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="ri-layout-3-line"></i>
+                            <span>Qruplar</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('groups.index')}}">Qruplar</a></li>
+                            <li><a href="{{route('auditors.index')}}">Auditorlar</a></li>
+                        </ul>
+                    </li>
+
 
 
                 </ul>
