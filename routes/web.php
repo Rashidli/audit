@@ -1,35 +1,14 @@
 <?php
 
-use App\Http\Controllers\ActController;
 use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DistributeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Settings\ActivityAreaController;
-use App\Http\Controllers\Settings\BankController;
-use App\Http\Controllers\Settings\CompanyCategoryController;
-use App\Http\Controllers\Settings\CompanyNameController;
-use App\Http\Controllers\Settings\CompanyAddressController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\Settings\CompanyTypeController;
-use App\Http\Controllers\Settings\ContractController;
-use App\Http\Controllers\Settings\CurrencyController;
-use App\Http\Controllers\Settings\EmployeeController;
-use App\Http\Controllers\Settings\InstitutionController;
-use App\Http\Controllers\Settings\MeetingTypeController;
-use App\Http\Controllers\Settings\PaymentConditionController;
-use App\Http\Controllers\Settings\PaymentTypeController;
-use App\Http\Controllers\Settings\SenderController;
-use App\Http\Controllers\Settings\ServiceOfferController;
-use App\Http\Controllers\Settings\SourceController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,14 +35,16 @@ Route::group(['middleware' =>'auth'], function (){
     Route::resource('users',UserController::class);
     Route::resource('roles',RoleController::class);
     Route::resource('permissions',PermissionController::class);
-    Route::resource('customers',CustomerController::class);
     Route::resource('orders',OrderController::class);
     Route::resource('groups',GroupController::class);
     Route::resource('auditors',AuditorController::class);
 
     Route::post('/import_excel',[OrderController::class,'import_excel'])->name('import_excel');
 
-    Route::get('/distributeNewOrders', [DistributeController::class,'distributeNewOrders'])->name('distributeNewOrders');
+    Route::post('/distributeNewOrders', [DistributeController::class,'distributeNewOrders'])->name('distributeNewOrders');
+    Route::post('/removeOrders', [DistributeController::class,'removeOrders'])->name('removeOrders');
+
+    Route::get('/group_orders/{id}',[PageController::class,'group_orders'])->name('group_orders');
 
     Route::get('/share_orders',[PageController::class,'share_orders'])->name('share_orders');
 

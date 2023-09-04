@@ -23,7 +23,8 @@
                                         <th>№</th>
                                         <th>Ad</th>
                                         <th>Sifarişləri</th>
-                                        <th>Əməliyyat</th>
+                                        <th>Sifariş ver</th>
+                                        <th>Sifariş geri al</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -32,9 +33,22 @@
                                         <tr>
                                             <th scope="row">{{$group->id}}</th>
                                             <td>{{$group->title}}</td>
-                                            <td></td>
+                                            <td>{{$group->orders->count()}} <a href="{{route('group_orders', $group->id)}}">Sifarişlərinə bax</a></td>
                                             <td>
-                                                <a href="#">Sifariş ver</a>
+                                                <form action="{{route('distributeNewOrders')}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="{{$group->id}}" name="group_id">
+                                                    <input  type="number" required name="number">
+                                                    <button class="btn btn-primary" type="submit">Sifariş ver</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{route('removeOrders')}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="{{$group->id}}" name="group_id">
+                                                    <input  type="number" required name="number">
+                                                    <button class="btn btn-primary" type="submit">Sifariş geri al</button>
+                                                </form>
                                             </td>
                                         </tr>
 

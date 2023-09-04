@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::where('group_id',null)->get();
         return view('users.index',compact('users'));
     }
 
@@ -54,22 +54,10 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
-        if($request->group_id){
-            $user->group_id = $request->group_id;
-        }
 
         $user->assignRole($request->role);
 
-//        if($request->role){
-//            foreach ($request->role as $r){
-//                $user->assignRole($r);
-//            }
-//        }
-
-
         $user->save();
-
-//        Auth::login($user);
 
         return redirect()->route('users.index')->with('message', 'İstifadəçi əlavə edildi');
 
@@ -119,13 +107,6 @@ class UserController extends Controller
         $user->syncRoles();
         $user->assignRole($request->role);
 
-//        if($request->role){
-//            $user->syncRoles();
-//
-//            foreach ($request->role as $p){
-//                $user->assignRole($p);
-//            }
-//        }
 
         $user->save();
 

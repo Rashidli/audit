@@ -11,44 +11,42 @@
                                     <div class="alert alert-success">{{session('message')}}</div>
                                 @endif
                                 <h4 class="card-title">Auditorlar</h4>
-                                        <a href="{{route('auditors.create')}}" class="btn btn-primary">+</a>
+                                <a href="{{route('auditors.create')}}" class="btn btn-primary">+</a>
                                 <br>
                                 <br>
-
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
 
                                         <thead>
                                         <tr>
-                                            <th>№</th>
+                                            <th>#</th>
                                             <th>Ad</th>
-                                            <th>Qrupu</th>
+                                            <th>Email</th>
                                             <th>Əməliyyat</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($auditors as $auditor)
-
                                             <tr>
                                                 <th scope="row">{{$auditor->id}}</th>
-                                                <td>{{$auditor->title}}</td>
-                                                <td>{{$auditor->group->title}}</td>
-                                                <td>
-                                                    <a href="{{route('auditors.edit',$auditor->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
+                                                <td>{{$auditor->name}}</td>
+                                                <td>{{$auditor->email}}</td>
+                                                <td><a href="{{route('auditors.edit',$auditor->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
                                                     <form action="{{route('auditors.destroy', $auditor->id)}}" method="post" style="display: inline-block">
                                                         {{ method_field('DELETE') }}
                                                         @csrf
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                        <button  type="submit" class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </td>
+
                                             </tr>
 
                                         @endforeach
 
                                         </tbody>
                                     </table>
-                                    <br>
                                 </div>
+
                             </div>
                         </div>
                     </div>

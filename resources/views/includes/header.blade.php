@@ -156,16 +156,6 @@
                             </ul>
                         </li>
 
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="ri-layout-3-line"></i>
-                            <span>Müştərilər</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{route('customers.create')}}">Müştəri yarat</a></li>
-                            <li><a href="{{route('customers.index')}}">Müştərilər</a></li>
-                        </ul>
-                    </li>
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">

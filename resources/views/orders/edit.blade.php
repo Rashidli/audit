@@ -13,6 +13,11 @@
                         <div class="row">
                             <div class="col-3">
                                 <div class="mb-3">
+                                    <label class="col-form-label">Sifariş nömrəsi</label>
+                                    <input value="{{$order->order_number}}" class="form-control" type="text" name="order_number">
+                                    @if($errors->first('order_number')) <small class="form-text text-danger">{{$errors->first('order_number')}}</small> @endif
+                                </div>
+                                <div class="mb-3">
                                     <label class="col-form-label">Sifariş tarixi</label>
                                     <input value="{{$order->order_date}}" class="form-control" type="date" name="order_date">
                                     @if($errors->first('order_date')) <small class="form-text text-danger">{{$errors->first('order_date')}}</small> @endif

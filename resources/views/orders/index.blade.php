@@ -34,7 +34,7 @@
                                         </div>
                                     </form>
                                 <h4 class="card-title">Sifarişlər</h4>
-                                <a href="{{route('orders.create')}}" class="btn btn-primary">+</a><br>
+                                <a href="{{route('orders.create')}}" class="btn btn-primary">+</a><br><br>
                                 <a href="{{route('share_orders')}}" class="btn btn-primary">Sifarişləri paylaşdır</a>
                                 <br>
                                 <br>
