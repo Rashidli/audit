@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Requests\PermissionStoreRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -20,10 +19,11 @@ class PermissionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
 
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('id', 'desc')->get();
         return view('permissions.index', compact('permissions'));
 
     }

@@ -22,6 +22,7 @@
                                     <tr>
                                         <th>№</th>
                                         <th>Ad</th>
+                                        <th>Sifariş sayı</th>
                                         <th>Sifarişləri</th>
                                         <th>Sifariş ver</th>
                                         <th>Sifariş geri al</th>
@@ -33,7 +34,8 @@
                                         <tr>
                                             <th scope="row">{{$group->id}}</th>
                                             <td>{{$group->title}}</td>
-                                            <td>{{$group->orders->count()}} <a href="{{route('group_orders', $group->id)}}">Sifarişlərinə bax</a></td>
+                                            <td>{{$group->orders->count()}}</td>
+                                            <td> <a href="{{route('group_orders', $group->id)}}">Sifarişlərinə bax</a></td>
                                             <td>
                                                 <form action="{{route('distributeNewOrders')}}" method="post">
                                                     @csrf

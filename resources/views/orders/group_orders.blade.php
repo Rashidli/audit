@@ -10,33 +10,7 @@
                             @if(session('message'))
                                 <div class="alert alert-success">{{session('message')}}</div>
                             @endif
-                            <form id="fileUploadForm" action="{{route('import_excel')}}" enctype="multipart/form-data" method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mb-3">
-                                            <label class=" col-form-label">Fayl</label>
-                                            <input value="{{old('file')}}" id="fileInput" class="form-control" type="file" name="file">
-                                            @if($errors->first('file')) <small class="form-text text-danger">{{$errors->first('file')}}</small> @endif
-                                        </div>
-                                        <div class="progress_display form-group">
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-                                            </div>
-                                        </div>
-
-                                        <div id="successMessage" class="progress_success alert alert-success">File yükləndi.</div>
-                                        {{--                                                <div id="errorMessage" class="alert alert-danger"></div>--}}
-                                        <div class="mb-3">
-                                            <button type="submit" class="btn progress_button btn-primary">Import et</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                             <h4 class="card-title">Sifarişlər</h4>
-                            <br>
-                            <br>
-
                                 <form action="{{route($route, $group->id)}}" method="get">
                                     <div class="row">
                                         <div class="col-1">
@@ -53,7 +27,7 @@
                                         </div>
                                         <div class="col-2">
                                             <div class="mb-3">
-                                                <label class="col-form-label">Text</label>
+                                                <label class="col-form-label">Sifariş id görə</label>
                                                 <input class="form-control" value="{{ request()->text}}" id="text" type="text" name="text">
                                             </div>
                                         </div>

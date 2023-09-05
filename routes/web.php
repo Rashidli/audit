@@ -4,6 +4,7 @@ use App\Http\Controllers\AuditorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DistributeController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GroupOrderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
@@ -44,8 +45,14 @@ Route::group(['middleware' =>'auth'], function (){
     Route::post('/distributeNewOrders', [DistributeController::class,'distributeNewOrders'])->name('distributeNewOrders');
     Route::post('/removeOrders', [DistributeController::class,'removeOrders'])->name('removeOrders');
 
-    Route::get('/group_orders/{id}',[PageController::class,'group_orders'])->name('group_orders');
+    Route::get('/group_orders/{id}',[PageController::class,'group_orders'])->name('group_orders'); //for admin
+
+    Route::get('/auditor_orders/{id}',[GroupOrderController::class,'auditor_orders'])->name('auditor_orders');
+    Route::get('/auditor_orders_edit/{order}',[GroupOrderController::class,'auditor_orders_edit'])->name('auditor_orders_edit');
+    Route::put('/auditor_orders_update/{order}',[GroupOrderController::class,'auditor_orders_update'])->name('auditor_orders_update');
 
     Route::get('/share_orders',[PageController::class,'share_orders'])->name('share_orders');
+
+    Route::get('/order_status/{auditor_status}',[PageController::class,'order_status'])->name('order_status');
 
 });
