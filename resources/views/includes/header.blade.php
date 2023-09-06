@@ -186,8 +186,8 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{route('order_status','Yaxşı')}}">Yaxşı</a></li>
-                            <li><a href="{{route('auditors.index')}}">Orta</a></li>
-                            <li><a href="{{route('auditors.index')}}">Ağır</a></li>
+                            <li><a href="{{route('order_status','Orta')}}">Orta</a></li>
+                            <li><a href="{{route('order_status','Ağır')}}">Ağır</a></li>
                         </ul>
                     </li>
 

@@ -22,8 +22,8 @@
                                     <tr>
                                         <th>№</th>
                                         <th>Ad</th>
-                                        <th>Sifariş sayı</th>
-                                        <th>Sifarişləri</th>
+                                        <th>Yeni Sifariş sayı</th>
+                                        <th>İşlənmiş sifariş sayı</th>
                                         <th>Sifariş ver</th>
                                         <th>Sifariş geri al</th>
                                     </tr>
@@ -34,8 +34,9 @@
                                         <tr>
                                             <th scope="row">{{$group->id}}</th>
                                             <td>{{$group->title}}</td>
-                                            <td>{{$group->orders->count()}}</td>
-                                            <td> <a href="{{route('group_orders', $group->id)}}">Sifarişlərinə bax</a></td>
+                                            <td> <a class="btn btn-primary" href="{{route('group_orders', $group->id)}}">Sifarişlərinə bax</a>  <span class="btn btn-primary">{{count($group->orders()->whereNull('auditor_status')->get())}}</span></td>
+                                            <td> <a class="btn btn-primary" href="{{route('worked_group_orders', $group->id)}}">Sifarişlərinə bax</a>  <span class="btn btn-primary">{{count($group->orders()->whereNotNull('auditor_status')->get())}}</span></td>
+
                                             <td>
                                                 <form action="{{route('distributeNewOrders')}}" method="post">
                                                     @csrf

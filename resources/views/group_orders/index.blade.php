@@ -63,8 +63,8 @@
                                         <th>#</th>
                                         <th>Sifariş tarixi</th>
                                         <th>Sifariş id</th>
-                                        <th>Xidmət növü</th>
-                                        <th>Telefon 2</th>
+                                        <th>Ünvan</th>
+                                        <th>Sürücü</th>
                                         <th>Sifarişin bitmə tarixi</th>
                                         <th>Müştəri</th>
                                         <th>Əməliyyat</th>
@@ -76,8 +76,8 @@
                                             <th scope="row">{{$order->order_number}}</th>
                                             <td>{{$order->order_date}}</td>
                                             <td>{{$order->order_id}}</td>
-                                            <td>{{$order->service_type}}</td>
-                                            <td>{{$order->phone_2}}</td>
+                                            <td>{{$order->address}}</td>
+                                            <td>{{$order->driver}}</td>
                                             <td>{{$order->order_end_date}}</td>
                                             <td>{{$order->customer_name}}</td>
 

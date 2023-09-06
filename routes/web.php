@@ -45,14 +45,18 @@ Route::group(['middleware' =>'auth'], function (){
     Route::post('/distributeNewOrders', [DistributeController::class,'distributeNewOrders'])->name('distributeNewOrders');
     Route::post('/removeOrders', [DistributeController::class,'removeOrders'])->name('removeOrders');
 
-    Route::get('/group_orders/{id}',[PageController::class,'group_orders'])->name('group_orders'); //for admin
 
-    Route::get('/auditor_orders/{id}',[GroupOrderController::class,'auditor_orders'])->name('auditor_orders');
+    Route::get('/new_group_orders/{id}',[PageController::class,'new_group_orders'])->name('group_orders'); //for admin
+    Route::get('/worked_group_orders/{id}',[PageController::class,'worked_group_orders'])->name('worked_group_orders'); //for admin
+
+
+    Route::get('/new_auditor_orders/{id}',[GroupOrderController::class,'new_auditor_orders'])->name('auditor_orders');
+    Route::get('/worked_auditor_orders/{id}',[GroupOrderController::class,'worked_auditor_orders'])->name('worked_auditor_orders');
     Route::get('/auditor_orders_edit/{order}',[GroupOrderController::class,'auditor_orders_edit'])->name('auditor_orders_edit');
     Route::put('/auditor_orders_update/{order}',[GroupOrderController::class,'auditor_orders_update'])->name('auditor_orders_update');
 
     Route::get('/share_orders',[PageController::class,'share_orders'])->name('share_orders');
 
-    Route::get('/order_status/{auditor_status}',[PageController::class,'order_status'])->name('order_status');
+    Route::get('/order_status/{auditor_status}',[PageController::class,'order_status'])->name('order_status')->middleware('role:admin');
 
 });

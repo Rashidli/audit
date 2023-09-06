@@ -679,6 +679,7 @@
                                     </div>
                                 </div>
                             </div>
+{{--                            <p>Auditor adı: {{$order->auditor_name}}</p>--}}
                             <div class="col-2">
                                 <div class="mb-3">
                                     <button class="btn btn-primary">Yadda saxla</button>

@@ -49,9 +49,9 @@
                                             <th>Sifariş tarixi</th>
                                             <th>Sifariş id</th>
                                             <th>Xidmət növü</th>
-                                            <th>Telefon 2</th>
                                             <th>Sifarişin bitmə tarixi</th>
-                                            <th>Müştəri</th>
+                                            <th>Auditor status</th>
+                                            <th>Auditor</th>
                                             <th>Əməliyyat</th>
                                         </tr>
                                         </thead>
@@ -62,9 +62,9 @@
                                                 <td>{{$order->order_date}}</td>
                                                 <td>{{$order->order_id}}</td>
                                                 <td>{{$order->service_type}}</td>
-                                                <td>{{$order->phone_2}}</td>
                                                 <td>{{$order->order_end_date}}</td>
-                                                <td>{{$order->customer_name}}</td>
+                                                <td>{{$order->auditor_status}}</td>
+                                                <td>{{$order->auditor_name}}</td>
 
                                                 <td><a href="{{route('orders.edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
                                                     <form action="{{route('orders.destroy', $order->id)}}" method="post" style="display: inline-block">
