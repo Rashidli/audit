@@ -65,28 +65,7 @@
                                     <input readonly value="{{$order->auditor_name}}" class="form-control" type="text" >
                                 </div>
                             </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="mb-3">
-                                    <label class=" col-form-label">Ustaları seç</label>
-                                    <select class="js-example-basic-multiple" style="width: 100%" name="masters[]" multiple="multiple">
-                                        @foreach($masters as $master)
-                                            <option value="{{$master->id}}" @foreach($order->masters as $order_master) {{$order_master->id == $master->id ? 'selected' : ''}} @endforeach>{{$master->title}}</option>
-                                        @endforeach
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-4 col-lg-3">
-                                <div class="mb-3">
-                                    <label class=" col-form-label">Köməkçiləri seç</label>
-                                    <select class="js-example-basic-multiple" style="width: 100%" name="workers[]" multiple="multiple">
-                                        @foreach($workers as $worker)
-                                            <option value="{{$worker->id}}"   @foreach($order->workers as $order_worker) {{$order_worker->id == $worker->id ? 'selected' : ''}} @endforeach>{{$worker->title}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <br><br>
                         <div class="row">
@@ -694,7 +673,6 @@
                         <div class="row">
                             <div class="mb-3">
                                 <div>
-                                    <input type="hidden" value="{{auth()->user()->name}}" name="auditor_name">
                                     <h5 class="font-size-14 mb-4">Status</h5>
                                     <div class="form-check mb-3">
                                         <input value="Yaxşı" {{$order->auditor_status == 'Yaxşı' ? 'checked' : ''}} required class="form-check-input" type="radio" name="auditor_status" id="auditor_status1">
@@ -717,27 +695,10 @@
                                 </div>
                             </div>
 {{--                            <p>Auditor adı: {{$order->auditor_name}}</p>--}}
-                            <div class="row">
-                                <div class="col-2 col-md-4 col-lg-3">
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary">Yadda saxla</button>
-                                    </div>
+                            <div class="col-2 col-md-4 col-lg-3">
+                                <div class="mb-3">
+                                    <button class="btn btn-primary">Yadda saxla</button>
                                 </div>
-                                @foreach($order->groups  as $group)
-                                    <div class="col-2 col-md-4 col-lg-3">
-                                        <div class="mb-3">
-                                            <a href="{{route('auditor_orders', $group->id)}}" class="btn btn-primary">Yeni sifarişlər siyahısına qayıt</a>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                @foreach($order->groups  as $group)
-
-                                    <div class="col-2 col-md-4 col-lg-3">
-                                        <div class="mb-3">
-                                            <a href="{{route('worked_auditor_orders', $group->id)}}" class="btn btn-primary">İşlənmiş sifarişlər siyahısına qayıt</a>
-                                        </div>
-                                    </div>
-                                @endforeach
                             </div>
                         </div>
                     </div>

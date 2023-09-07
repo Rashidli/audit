@@ -33,39 +33,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <!-- App js -->
 <script src="{{asset('assets/js/app.js')}}"></script>
-<script src="{{asset('assets/js/select2.js')}}"></script>
-
+{{--<script src="{{asset('assets/js/select2.js')}}"></script>--}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
 
     $(document).ready(function (){
-        $('#corporate_name').change(function(){
-            var voen_number = $(this).find(':selected').attr('data-voen');
-            $('#voen').val(voen_number);
-        });
 
-        $('.js-example-basic-single').select2();
-
-        $('.group-checkbox').on('click', function() {
-
-            // $(this).prop('checked', !$(this).prop('checked'));
-            var groupBoolean =  $(this).prop('checked');
-            var groupValue = $(this).data('group');
-
-            $('input[type="checkbox"][data-group="' + groupValue + '"]').each(function() {
-
-                if(groupBoolean){
-                    $(this).prop('checked', true);
-                }else{
-                    $(this).prop('checked', false);
-                }
-
-            });
-
-        });
-
-
-
+        $('.js-example-basic-multiple').select2();
 
     });
 

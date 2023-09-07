@@ -25,8 +25,7 @@ class PageController extends Controller
     public function home()
     {
 
-
-        $customer_count = Order::where('is_new', true)->count();
+        $customer_count = Order::all()->count();
         return view('home',compact('customer_count'));
 
     }
@@ -119,6 +118,20 @@ class PageController extends Controller
 
         return view('order_status.index', compact('orders','route','count'));
 
+    }
+
+    public function edit_order_status(Order $order)
+    {
+
+        return view('order_status.edit', compact('order'));
+
+    }
+
+    public function update_order_status(Request $request,Order $order)
+    {
+        $order->update($request->all());
+
+        return redirect()->back()->with('message', 'Məlumat update edildi.');
     }
 
 }

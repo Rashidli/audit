@@ -82,7 +82,7 @@
                                             <td>{{$order->customer_name}}</td>
 
                                             <td>
-                                                <a href="{{route('auditor_orders_edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
+                                                <a href="{{route('edit_order_status',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
                                             </td>
                                         </tr>
 

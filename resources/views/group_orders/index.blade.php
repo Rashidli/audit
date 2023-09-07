@@ -7,13 +7,16 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+
                             @if(session('message'))
                                 <div class="alert alert-success">{{session('message')}}</div>
                             @endif
+
                             <h4 class="card-title">Sifarişlər</h4>
+
                             <form action="{{route($route, $group->id)}}" method="get">
                                 <div class="row">
-                                    <div class="col-1">
+                                    <div class="col-3 col-md-3">
                                         <div class="mb-3">
                                             <label class=" col-form-label">Limit</label>
                                             <select class="form-control" type="text" name="limit">
@@ -25,32 +28,31 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3 col-md-3">
                                         <div class="mb-3">
                                             <label class="col-form-label">Sifariş id görə</label>
                                             <input class="form-control" value="{{ request()->text}}" id="text" type="text" name="text">
                                         </div>
                                     </div>
-                                    <div class="col-1">
+                                    <div class="col-1 col-md-3">
                                         <div class="mb-3">
                                             <div class="pt-4 mt-3">
                                                 <button value="submit" class="btn btn-primary">Axtar</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1">
-                                        <div class="mb-3">
+                                    <div class="col-2 col-md-3">
+                                        <div class="mb-3" style="display: flex; justify-content: space-between">
                                             <div class="pt-4 mt-3">
                                                 <a class="btn btn-primary" href="{{route($route, $group->id)}}">Sıfırla</a>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="mb-3">
                                             <div class="pt-4 mt-3">
                                                 <p class="text-primary">Nəticə: {{$count}}</p>
                                             </div>
                                         </div>
+{{--                                        <div class="mb-3">--}}
+{{--                                            --}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </form>
@@ -101,7 +103,5 @@
         </div>
     </div>
 </div>
-
-
 
 @include('includes.footer')

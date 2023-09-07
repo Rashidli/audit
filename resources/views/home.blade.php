@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="flex-grow-1">
-                                    <p class="text-truncate font-size-14 mb-2">Müştəri sayı</p>
+                                    <p class="text-truncate font-size-14 mb-2">Sifariş sayı</p>
                                     <h4 class="mb-2">{{$customer_count}}</h4>
                                 </div>
 

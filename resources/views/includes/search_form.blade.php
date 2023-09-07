@@ -1,7 +1,7 @@
 
 <form action="{{route($route)}}" method="get">
     <div class="row">
-        <div class="col-1">
+        <div class="col-2 col-md-2">
             <div class="mb-3">
                 <label class=" col-form-label">Limit</label>
                 <select class="form-control" type="text" name="limit">
@@ -13,13 +13,13 @@
                 </select>
             </div>
         </div>
-        <div class="col-2">
-            <div class="mb-3">
-                <label class="col-form-label" >Tarixi</label>
-                <input class="form-control" id="text" value="{{ request()->date}}" type="date" name="date">
-            </div>
-        </div>
-        <div class="col-2">
+{{--        <div class="col-2 col-md-2">--}}
+{{--            <div class="mb-3">--}}
+{{--                <label class="col-form-label" >Tarixi</label>--}}
+{{--                <input class="form-control" id="text" value="{{ request()->date}}" type="date" name="date">--}}
+{{--            </div>--}}
+{{--        </div>--}}
+        <div class="col-2 col-md-2">
             <div class="mb-3">
                 <label class=" col-form-label">Status</label>
                 <select class="form-control" id="is_active" type="text" name="is_new">
@@ -29,27 +29,27 @@
                 </select>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-2 col-md-2">
             <div class="mb-3">
                 <label class="col-form-label">Text</label>
                 <input class="form-control" value="{{ request()->text}}" id="text" type="text" name="text">
             </div>
         </div>
-        <div class="col-1">
+        <div class="col-2 col-md-2">
             <div class="mb-3">
                 <div class="pt-4 mt-3">
                     <button value="submit" class="btn btn-primary">Axtar</button>
                 </div>
             </div>
         </div>
-        <div class="col-1">
+        <div class="col-2 col-md-2">
             <div class="mb-3">
                 <div class="pt-4 mt-3">
                     <a class="btn btn-primary" href="{{route($route)}}">Sıfırla</a>
                 </div>
             </div>
         </div>
-        <div class="col-1">
+        <div class="col-2 col-md-2">
             <div class="mb-3">
                 <div class="pt-4 mt-3">
                     <p class="text-primary">Nəticə: {{$data['count']}}</p>

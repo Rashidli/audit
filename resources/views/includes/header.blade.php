@@ -10,7 +10,7 @@
     <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-    <link href="{{asset('assets/css/select2.css')}}" rel="stylesheet" />
+
     <!-- jquery.vectormap css -->
     <link href="{{asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css" />
 
@@ -27,6 +27,7 @@
     <!-- App Css-->
     <link href="{{asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{asset('assets/css/select2.css')}}" rel="stylesheet" />
 
 </head>
 
@@ -97,8 +98,6 @@
                         </form>
                     </div>
                 </div>
-
-
 
                 <div class="dropdown d-none d-lg-inline-block ms-1">
                     <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
@@ -188,6 +187,17 @@
                             <li><a href="{{route('order_status','Yaxşı')}}">Yaxşı</a></li>
                             <li><a href="{{route('order_status','Orta')}}">Orta</a></li>
                             <li><a href="{{route('order_status','Ağır')}}">Ağır</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="ri-layout-3-line"></i>
+                            <span>Tənzimləmələr</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('masters.index')}}">Ustalar</a></li>
+                            <li><a href="{{route('workers.index')}}">Köməkçilər</a></li>
                         </ul>
                     </li>
 
