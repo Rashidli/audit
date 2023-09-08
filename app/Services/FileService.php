@@ -10,9 +10,11 @@ class FileService
 
     public function uploadFile(UploadedFile $image, ?string $path = 'files', string $disk = 'public'): string
     {
+
         $name = $path . '/' . Str::uuid()->toString() . '.' . $image->extension();
         $image->storeAs($disk, $name);
         return $name;
+
     }
 
     public function removeFile($image_name, string $disk = 'public')

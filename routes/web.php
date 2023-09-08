@@ -26,6 +26,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/clear',function (){
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    return 'Success';
+});
+
+Route::get('/link',function (){
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    return 'Success';
+});
+
 Route::get('/', [PageController::class,'login'])->name('login');
 Route::get('/register', [PageController::class,'register'])->name('register');
 Route::post('/login_submit',[AuthController::class,'login_submit'])->name('login_submit');
@@ -52,10 +62,8 @@ Route::group(['middleware' =>'auth'], function (){
     Route::post('/distributeNewOrders', [DistributeController::class,'distributeNewOrders'])->name('distributeNewOrders');
     Route::post('/removeOrders', [DistributeController::class,'removeOrders'])->name('removeOrders');
 
-
     Route::get('/new_group_orders/{id}',[PageController::class,'new_group_orders'])->name('group_orders'); //for admin
     Route::get('/worked_group_orders/{id}',[PageController::class,'worked_group_orders'])->name('worked_group_orders'); //for admin
-
 
     Route::get('/new_auditor_orders/{id}',[GroupOrderController::class,'new_auditor_orders'])->name('auditor_orders');
     Route::get('/worked_auditor_orders/{id}',[GroupOrderController::class,'worked_auditor_orders'])->name('worked_auditor_orders');
@@ -71,21 +79,21 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/test', function (){
         if(!Cache::has('orders')){
 
-//            dd('if');
             $data = \App\Models\Order::all();
             Cache::put('orders', $data);
 
         }else{
-//            dd('else');
+
             $orders = Cache::get('orders');
 
         }
 
-
        return view('test.index', compact('orders'));
 
     });
+
     Route::get('/delete_cache', function (){
         Cache::delete('orders');
     });
+
 });

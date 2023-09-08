@@ -142,6 +142,7 @@
                         </a>
                     </li>
 
+
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="ri-layout-3-line"></i>
@@ -155,52 +156,51 @@
                             </ul>
                         </li>
 
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-layout-3-line"></i>
+                                <span>Sifarişlər</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{route('orders.create')}}">Sifariş yarat</a></li>
+                                <li><a href="{{route('orders.index')}}">Sifarişlər</a></li>
+                            </ul>
+                        </li>
 
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="ri-layout-3-line"></i>
-                            <span>Sifarişlər</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{route('orders.create')}}">Sifariş yarat</a></li>
-                            <li><a href="{{route('orders.index')}}">Sifarişlər</a></li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="{{route('groups.index')}}"><i class="ri-layout-3-line"></i><span>Qruplar</span></a>
+                        </li>
 
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="ri-layout-3-line"></i>
-                            <span>Qruplar</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{route('groups.index')}}">Qruplar</a></li>
-                            <li><a href="{{route('auditors.index')}}">Auditorlar</a></li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="{{route('auditors.index')}}"><i class="ri-layout-3-line"></i><span>Auditorlar</span></a>
+                        </li>
 
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="ri-layout-3-line"></i>
-                            <span>İşlənmiş sifarişlər</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{route('order_status','Yaxşı')}}">Yaxşı</a></li>
-                            <li><a href="{{route('order_status','Orta')}}">Orta</a></li>
-                            <li><a href="{{route('order_status','Ağır')}}">Ağır</a></li>
-                        </ul>
-                    </li>
 
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="ri-layout-3-line"></i>
-                            <span>Tənzimləmələr</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{route('masters.index')}}">Ustalar</a></li>
-                            <li><a href="{{route('workers.index')}}">Köməkçilər</a></li>
-                        </ul>
-                    </li>
 
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-layout-3-line"></i>
+                                <span>İşlənmiş sifarişlər</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{route('order_status','Yaxşı')}}">Yaxşı</a></li>
+                                <li><a href="{{route('order_status','Orta')}}">Orta</a></li>
+                                <li><a href="{{route('order_status','Ağır')}}">Ağır</a></li>
+                            </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-layout-3-line"></i>
+                                <span>Tənzimləmələr</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{route('masters.index')}}">Ustalar</a></li>
+                                <li><a href="{{route('workers.index')}}">Köməkçilər</a></li>
+                            </ul>
+                        </li>
 
 
                 </ul>
