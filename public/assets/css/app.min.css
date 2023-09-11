@@ -20,3 +20,55 @@
 .progress_display{
     display: none;
 }
+
+
+
+
+
+
+/* Style for the container of each radio button */
+.radio-icon-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Style for the radio input, hide the default radio button */
+.radio-icon-container input[type="checkbox"] {
+    display: none;
+}
+
+.radio-label{
+    display: flex;
+}
+.radio-label i.fas.fa-check {
+    color: green;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio-label i.fas.fa-times {
+    width: 30px;
+    height: 30px;
+    color: red;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checked{
+
+    background-color: #00000038;
+
+}

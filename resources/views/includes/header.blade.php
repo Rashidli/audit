@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{{asset('assets/css/select2.css')}}" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body data-topbar="dark">
@@ -85,11 +87,11 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                          aria-labelledby="page-header-search-dropdown">
-
+X
                         <form class="p-3">
                             <div class="mb-3 m-0">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search ...">
+                                    <input type="text" class="form-control" placeholder="search ...">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit"><i class="ri-search-line"></i></button>
                                     </div>
@@ -112,10 +114,10 @@
                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="javascript: void(0)"><i class="ri-user-line align-middle me-1"></i> Profile</a>
-                        <a class="dropdown-item d-block" href="javascript: void(0)"><span class="badge bg-success float-end mt-1">11</span><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                        <a class="dropdown-item" href="javascript: void(0)"><i class="ri-user-line align-middle me-1"></i> profile</a>
+                        <a class="dropdown-item d-block" href="javascript: void(0)"><span class="badge bg-success float-end mt-1">11</span><i class="ri-settings-2-line align-middle me-1"></i> settings</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="{{route('logout')}}"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Çıxış</a>
+                        <a class="dropdown-item text-danger" href="{{route('logout')}}"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> çıxış</a>
                     </div>
                 </div>
 
@@ -143,6 +145,7 @@
                     </li>
 
 
+                    @if(Auth::user()->hasRole('admin'))
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="ri-layout-3-line"></i>
@@ -155,7 +158,9 @@
                                 <li><a href="{{route('permissions.index')}}">Permissions</a></li>
                             </ul>
                         </li>
+                    @endif
 
+                    @if(Auth::user()->hasRole('admin'))
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="ri-layout-3-line"></i>
@@ -166,17 +171,21 @@
                                 <li><a href="{{route('orders.index')}}">Sifarişlər</a></li>
                             </ul>
                         </li>
+                    @endif
 
-                        <li>
-                            <a href="{{route('groups.index')}}"><i class="ri-layout-3-line"></i><span>Qruplar</span></a>
-                        </li>
+                    @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('auditor'))
+                            <li>
+                                <a href="{{route('groups.index')}}"><i class="ri-layout-3-line"></i><span>Qruplar</span></a>
+                            </li>
+                    @endif
 
+                    @if(Auth::user()->hasRole('admin'))
                         <li>
                             <a href="{{route('auditors.index')}}"><i class="ri-layout-3-line"></i><span>Auditorlar</span></a>
                         </li>
+                    @endif
 
-
-
+                    @if(Auth::user()->hasRole('admin'))
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="ri-layout-3-line"></i>
@@ -188,9 +197,9 @@
                                 <li><a href="{{route('order_status','Ağır')}}">Ağır</a></li>
                             </ul>
                         </li>
+                    @endif
 
-
-
+                    @if(Auth::user()->hasRole('admin'))
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="ri-layout-3-line"></i>
@@ -201,7 +210,7 @@
                                 <li><a href="{{route('workers.index')}}">Köməkçilər</a></li>
                             </ul>
                         </li>
-
+                    @endif
 
                 </ul>
             </div>

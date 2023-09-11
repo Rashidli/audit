@@ -757,6 +757,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-two-tab">
                                     <div class="row">
+
                                         <div class="col-2 col-md-4 col-lg-3">
                                             <div class="mb-3">
                                                 <div>

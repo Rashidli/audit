@@ -296,6 +296,44 @@
                                                             Ağır
                                                         </label>
                                                     </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-2 col-md-4 col-lg-3">
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch mb-3" dir="ltr">
+                                                    <input type="checkbox" class="form-check-input" id="customSwitch1" checked="">
+                                                    <label class="form-check-label" for="customSwitch1">Geyim forması, saç-saqqal düzümü (Orta)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-2 col-md-4 col-lg-3">
+                                            <div class="mb-3">
+                                                <div class="radio-icon-container">
+                                                    <input type="checkbox" name="clothes_new" class="radio_button">
+                                                    <label for="option1" class="radio-label">
+                                                        <i class="fas fa-check clicked_jquery_check"></i>
+                                                        <i class="fas fa-times clicked_jquery_uncheck"></i>
+                                                        Geyim forması, saç-saqqal düzümü (Orta)
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-2 col-md-4 col-lg-3">
+                                            <div class="mb-3">
+                                                <div class="radio-icon-container">
+                                                    <input type="checkbox" name="clothes_test" class="radio_button">
+                                                    <label for="option1" class="radio-label">
+                                                        <i class="fas fa-check clicked_jquery_check"></i>
+                                                        <i class="fas fa-times clicked_jquery_uncheck"></i>
+                                                        Geyim forması, saç-saqqal düzümü (Orta)
+                                                    </label>
+
                                                 </div>
                                             </div>
                                         </div>
