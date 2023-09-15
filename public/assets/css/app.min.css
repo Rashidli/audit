@@ -34,7 +34,7 @@
 }
 
 /* Style for the radio input, hide the default radio button */
-.radio-icon-container input[type="checkbox"] {
+.radio-icon-container input[type="radio"] {
     display: none;
 }
 

@@ -1,16 +1,13 @@
 @include('includes.header')
-
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
             @if(session('message'))
                 <div class="alert alert-success">{{session('message')}}</div>
             @endif
-            <form action="{{route('auditor_orders_update', $order->id)}}" method="post" enctype="multipart/form-data">
-                {{ method_field('PUT') }}
-                @csrf
-                <div class="card">
+            <form action="#" method="post" enctype="multipart/form-data">
 
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
 
@@ -222,19 +219,42 @@
                                 </div>
                             </div>
 
+
                             <div class="col-2 col-md-4 col-lg-3">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Auditor status</label>
                                     <input readonly value="{{$order->auditor_status}}" class="form-control" type="text" >
                                 </div>
                             </div>
+
                             <div class="col-2 col-md-4 col-lg-3">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Auditor</label>
                                     <input readonly value="{{$order->auditor_name}}" class="form-control" type="text" >
                                 </div>
                             </div>
+                            <div class="col-2 col-md-4 col-lg-3">
+                                <div class="mb-3">
+                                    <label class=" col-form-label">Ustaları seç</label>
+                                    <select class="js-example-basic-multiple" style="width: 100%" name="masters[]" multiple="multiple">
+                                        @foreach($masters as $master)
+                                            <option value="{{$master->id}}" @foreach($order->masters as $order_master) {{$order_master->id == $master->id ? 'selected' : ''}} @endforeach>{{$master->title}}</option>
+                                        @endforeach
 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-4 col-lg-3">
+                                <div class="mb-3">
+                                    <label class=" col-form-label">Köməkçiləri seç</label>
+                                    <select class="js-example-basic-multiple" style="width: 100%" name="workers[]" multiple="multiple">
+                                        @foreach($workers as $worker)
+                                            <option value="{{$worker->id}}"   @foreach($order->workers as $order_worker) {{$order_worker->id == $worker->id ? 'selected' : ''}} @endforeach>{{$worker->title}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <br><br>
                         <div class="row">
@@ -257,8 +277,8 @@
                                             <div class="mb-3">
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="clothes" class="radio_button" value="1" {{$order->clothes == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="clothes" class="radio_button" value="0" {{$order->clothes == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="clothes" class="radio_button" value="1" {{$order->clothes == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="clothes" class="radio_button" value="0" {{$order->clothes == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->clothes == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->clothes == '0' ? 'checked' : ''}}"></i>
@@ -274,8 +294,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="fmv" class="radio_button" value="1" {{$order->fmv == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="fmv" class="radio_button" value="0" {{$order->fmv == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="fmv" class="radio_button" value="1" {{$order->fmv == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="fmv" class="radio_button" value="0" {{$order->fmv == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->fmv == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->fmv == '0' ? 'checked' : ''}}"></i>
@@ -290,8 +310,8 @@
                                             <div class="mb-3">
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="risk" class="radio_button" value="1" {{$order->risk == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="risk" class="radio_button" value="0" {{$order->risk == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="risk" class="radio_button" value="1" {{$order->risk == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="risk" class="radio_button" value="0" {{$order->risk == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->risk == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->risk == '0' ? 'checked' : ''}}"></i>
@@ -307,8 +327,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="internal_rules" class="radio_button" value="1" {{$order->internal_rules == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="internal_rules" class="radio_button" value="0" {{$order->internal_rules == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="internal_rules" class="radio_button" value="1" {{$order->internal_rules == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="internal_rules" class="radio_button" value="0" {{$order->internal_rules == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->internal_rules == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->internal_rules == '0' ? 'checked' : ''}}"></i>
@@ -324,8 +344,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="behavior_rules" class="radio_button" value="1" {{$order->behavior_rules == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="behavior_rules" class="radio_button" value="0" {{$order->behavior_rules == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="behavior_rules" class="radio_button" value="1" {{$order->behavior_rules == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="behavior_rules" class="radio_button" value="0" {{$order->behavior_rules == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->behavior_rules == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->behavior_rules == '0' ? 'checked' : ''}}"></i>
@@ -340,8 +360,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="safety" class="radio_button" value="1" {{$order->safety == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="safety" class="radio_button" value="0" {{$order->safety == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="safety" class="radio_button" value="1" {{$order->safety == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="safety" class="radio_button" value="0" {{$order->safety == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->safety == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->safety == '0' ? 'checked' : ''}}"></i>
@@ -356,8 +376,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="delivery" class="radio_button" value="1" {{$order->delivery == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="delivery" class="radio_button" value="0" {{$order->delivery == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="delivery" class="radio_button" value="1" {{$order->delivery == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="delivery" class="radio_button" value="0" {{$order->delivery == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->delivery == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->delivery == '0' ? 'checked' : ''}}"></i>
@@ -372,8 +392,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="workbook" class="radio_button" value="1" {{$order->workbook == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="workbook" class="radio_button" value="0" {{$order->workbook == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="workbook" class="radio_button" value="1" {{$order->workbook == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="workbook" class="radio_button" value="0" {{$order->workbook == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->workbook == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->workbook == '0' ? 'checked' : ''}}"></i>
@@ -394,8 +414,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="license" class="radio_button" value="1" {{$order->license == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="license" class="radio_button" value="0" {{$order->license == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="license" class="radio_button" value="1" {{$order->license == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="license" class="radio_button" value="0" {{$order->license == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->license == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->license == '0' ? 'checked' : ''}}"></i>
@@ -412,8 +432,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="ysb" class="radio_button" value="1" {{$order->ysb == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="ysb" class="radio_button" value="0" {{$order->ysb == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="ysb" class="radio_button" value="1" {{$order->ysb == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="ysb" class="radio_button" value="0" {{$order->ysb == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->ysb == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->ysb == '0' ? 'checked' : ''}}"></i>
@@ -428,8 +448,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="medicine" class="radio_button" value="1" {{$order->medicine == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="medicine" class="radio_button" value="0" {{$order->medicine == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="medicine" class="radio_button" value="1" {{$order->medicine == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="medicine" class="radio_button" value="0" {{$order->medicine == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->medicine == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->medicine == '0' ? 'checked' : ''}}"></i>
@@ -445,8 +465,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="cleaning" class="radio_button" value="1" {{$order->cleaning == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="cleaning" class="radio_button" value="0" {{$order->cleaning == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="cleaning" class="radio_button" value="1" {{$order->cleaning == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="cleaning" class="radio_button" value="0" {{$order->cleaning == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->cleaning == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->cleaning == '0' ? 'checked' : ''}}"></i>
@@ -461,8 +481,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="loading_unloading" class="radio_button" value="1" {{$order->loading_unloading == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="loading_unloading" class="radio_button" value="0" {{$order->loading_unloading == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="loading_unloading" class="radio_button" value="1" {{$order->loading_unloading == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="loading_unloading" class="radio_button" value="0" {{$order->loading_unloading == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->loading_unloading == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->loading_unloading == '0' ? 'checked' : ''}}"></i>
@@ -477,8 +497,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="traffic_rules" class="radio_button" value="1" {{$order->traffic_rules == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="traffic_rules" class="radio_button" value="0" {{$order->traffic_rules == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="traffic_rules" class="radio_button" value="1" {{$order->traffic_rules == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="traffic_rules" class="radio_button" value="0" {{$order->traffic_rules == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->traffic_rules == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->traffic_rules == '0' ? 'checked' : ''}}"></i>
@@ -497,8 +517,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="packaging" class="radio_button" value="1" {{$order->packaging == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="packaging" class="radio_button" value="0" {{$order->packaging == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="packaging" class="radio_button" value="1" {{$order->packaging == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="packaging" class="radio_button" value="0" {{$order->packaging == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->packaging == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->packaging == '0' ? 'checked' : ''}}"></i>
@@ -514,8 +534,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="installation" class="radio_button" value="1" {{$order->installation == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="installation" class="radio_button" value="0" {{$order->installation == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="installation" class="radio_button" value="1" {{$order->installation == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="installation" class="radio_button" value="0" {{$order->installation == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->installation == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->installation == '0' ? 'checked' : ''}}"></i>
@@ -538,8 +558,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="special_loads" class="radio_button" value="1" {{$order->special_loads == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="special_loads" class="radio_button" value="0" {{$order->special_loads == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="special_loads" class="radio_button" value="1" {{$order->special_loads == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="special_loads" class="radio_button" value="0" {{$order->special_loads == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->special_loads == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->special_loads == '0' ? 'checked' : ''}}"></i>
@@ -555,8 +575,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="manual_lifting" class="radio_button" value="1" {{$order->manual_lifting == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="manual_lifting" class="radio_button" value="0" {{$order->manual_lifting == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="manual_lifting" class="radio_button" value="1" {{$order->manual_lifting == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="manual_lifting" class="radio_button" value="0" {{$order->manual_lifting == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->manual_lifting == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->manual_lifting == '0' ? 'checked' : ''}}"></i>
@@ -571,8 +591,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="lifting_correctly" class="radio_button" value="1" {{$order->lifting_correctly == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="lifting_correctly" class="radio_button" value="0" {{$order->lifting_correctly == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="lifting_correctly" class="radio_button" value="1" {{$order->lifting_correctly == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="lifting_correctly" class="radio_button" value="0" {{$order->lifting_correctly == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->lifting_correctly == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->lifting_correctly == '0' ? 'checked' : ''}}"></i>
@@ -592,8 +612,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="job_easier" class="radio_button" value="1" {{$order->job_easier == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="job_easier" class="radio_button" value="0" {{$order->job_easier == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="job_easier" class="radio_button" value="1" {{$order->job_easier == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="job_easier" class="radio_button" value="0" {{$order->job_easier == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->job_easier == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->job_easier == '0' ? 'checked' : ''}}"></i>
@@ -609,8 +629,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="alternative_companies" class="radio_button" value="1" {{$order->alternative_companies == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="alternative_companies" class="radio_button" value="0" {{$order->alternative_companies == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="alternative_companies" class="radio_button" value="1" {{$order->alternative_companies == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="alternative_companies" class="radio_button" value="0" {{$order->alternative_companies == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->alternative_companies == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->alternative_companies == '0' ? 'checked' : ''}}"></i>
@@ -625,8 +645,8 @@
 
                                                 <div class="radio-icon-container">
 
-                                                    <input type="radio" name="recommend" class="radio_button" value="1" {{$order->recommend == '1' ? 'checked' : ''}}>
-                                                    <input type="radio" name="recommend" class="radio_button" value="0" {{$order->recommend == '0' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="recommend" class="radio_button" value="1" {{$order->recommend == '1' ? 'checked' : ''}}>
+                                                    <input type="radio" readonly name="recommend" class="radio_button" value="0" {{$order->recommend == '0' ? 'checked' : ''}}>
                                                     <label for="option1" class="radio-label">
                                                         <i class="fas fa-check clicked_jquery_check {{$order->recommend == '1' ? 'checked' : ''}} "></i>
                                                         <i class="fas fa-times clicked_jquery_uncheck {{$order->recommend == '0' ? 'checked' : ''}}"></i>
@@ -646,47 +666,24 @@
                                     <input type="hidden" value="{{auth()->user()->name}}" name="auditor_name">
                                     <h5 class="font-size-14 mb-4">Status</h5>
                                     <div class="form-check mb-3">
-                                        <input value="Yüngül" {{$order->auditor_status == 'Yüngül' ? 'checked' : ''}} class="form-check-input" type="radio" name="auditor_status" id="auditor_status1">
+                                        <input value="Yüngül" {{$order->auditor_status == 'Yüngül' ? 'checked' : ''}} class="form-check-input" type="radio" readonly name="auditor_status" id="auditor_status1">
                                         <label  class="form-check-label" for="auditor_status1">
                                             Yüngül
                                         </label>
                                     </div>
                                     <div class="form-check mb-3">
-                                        <input value="Orta" {{$order->auditor_status == 'Orta' ? 'checked' : ''}} class="form-check-input" type="radio" name="auditor_status" id="auditor_status2">
+                                        <input value="Orta" {{$order->auditor_status == 'Orta' ? 'checked' : ''}} class="form-check-input" type="radio" readonly name="auditor_status" id="auditor_status2">
                                         <label class="form-check-label" for="auditor_status2">
                                             Orta
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input value="Ağır" {{$order->auditor_status == 'Ağır' ? 'checked' : ''}} class="form-check-input" type="radio" name="auditor_status" id="auditor_status3">
+                                        <input value="Ağır" {{$order->auditor_status == 'Ağır' ? 'checked' : ''}} class="form-check-input" type="radio" readonly name="auditor_status" id="auditor_status3">
                                         <label class="form-check-label" for="auditor_status3">
                                             Ağır
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2 col-md-4 col-lg-3">
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary">Yadda saxla</button>
-                                    </div>
-                                </div>
-                                @foreach($order->groups  as $group)
-                                    <div class="col-2 col-md-4 col-lg-3">
-                                        <div class="mb-3">
-                                            <a href="{{route('auditor_orders', $group->id)}}" class="btn btn-primary">Yeni sifarişlər siyahısına qayıt</a>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                @foreach($order->groups  as $group)
-
-                                    <div class="col-2 col-md-4 col-lg-3">
-                                        <div class="mb-3">
-                                            <a href="{{route('worked_auditor_orders', $group->id)}}" class="btn btn-primary">İşlənmiş sifarişlər siyahısına qayıt</a>
-                                        </div>
-                                    </div>
-
-                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -696,5 +693,4 @@
         </div>
     </div>
 </div>
-
 @include('includes.footer')

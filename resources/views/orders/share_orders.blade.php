@@ -11,7 +11,7 @@
                                 <div class="alert alert-success">{{session('message')}}</div>
                             @endif
                             <h4 class="card-title">Qruplar</h4>
-                                <p>Yeni sifariş sayı: {{$orders_count}}</p>
+                                <p>Yeni {{$mixin}} sifariş sayı: {{$orders_count}}</p>
                             <br>
                             <br>
 
@@ -41,6 +41,7 @@
                                                 <form action="{{route('distributeNewOrders')}}" method="post">
                                                     @csrf
                                                     <input type="hidden" value="{{$group->id}}" name="group_id">
+                                                    <input type="hidden" value="{{$mixin}}" name="mixin">
                                                     <input  type="number" required name="number">
                                                     <button class="btn btn-primary" type="submit">Sifariş ver</button>
                                                 </form>
@@ -49,6 +50,7 @@
                                                 <form action="{{route('removeOrders')}}" method="post">
                                                     @csrf
                                                     <input type="hidden" value="{{$group->id}}" name="group_id">
+                                                    <input type="hidden" value="{{$mixin}}" name="mixin">
                                                     <input  type="number" required name="number">
                                                     <button class="btn btn-primary" type="submit">Sifariş geri al</button>
                                                 </form>

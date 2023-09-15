@@ -35,7 +35,9 @@
                                     </form>
                                 <h4 class="card-title">Sifarişlər</h4>
                                 <a href="{{route('orders.create')}}" class="btn btn-primary">+</a><br><br>
-                                <a href="{{route('share_orders')}}" class="btn btn-primary">Sifarişləri paylaşdır</a>
+                                <a href="{{route('share_orders', 'mixin')}}" class="btn btn-primary">Mixin sifarişləri paylaşdır(yeni) {{$mixin_count}}</a><br><br>
+                                <a href="{{route('share_orders', 'single')}}" class="btn btn-primary">Single sifarişləri paylaşdır(yeni) {{$single_count}}</a>
+
                                 <br>
                                 <br>
 
@@ -58,7 +60,7 @@
                                         <tbody id="results">
                                         @foreach($data['items'] as $order)
                                             <tr>
-                                                <th scope="row">{{$order->id}}</th>
+                                                <th scope="row">{{$order->order_number}}</th>
                                                 <td>{{$order->order_date}}</td>
                                                 <td>{{$order->order_id}}</td>
                                                 <td>{{$order->service_type}}</td>

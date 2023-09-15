@@ -192,7 +192,7 @@ X
                                 <span>İşlənmiş sifarişlər</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{route('order_status','Yaxşı')}}">Yaxşı</a></li>
+                                <li><a href="{{route('order_status','Yüngül')}}">Yüngül</a></li>
                                 <li><a href="{{route('order_status','Orta')}}">Orta</a></li>
                                 <li><a href="{{route('order_status','Ağır')}}">Ağır</a></li>
                             </ul>
@@ -209,6 +209,12 @@ X
                                 <li><a href="{{route('masters.index')}}">Ustalar</a></li>
                                 <li><a href="{{route('workers.index')}}">Köməkçilər</a></li>
                             </ul>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->hasRole('admin'))
+                        <li>
+                            <a href="{{route('report')}}"><i class="ri-layout-3-line"></i><span>Hesabatlar</span></a>
                         </li>
                     @endif
 

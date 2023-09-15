@@ -9,6 +9,7 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
@@ -46,7 +47,6 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/home', [PageController::class,'home'])->name('home');
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
-
     Route::resource('users',UserController::class);
     Route::resource('roles',RoleController::class);
     Route::resource('permissions',PermissionController::class);
@@ -55,7 +55,6 @@ Route::group(['middleware' =>'auth'], function (){
     Route::resource('auditors',AuditorController::class);
     Route::resource('masters',MasterController::class);
     Route::resource('workers',WorkerController::class);
-
 
     Route::post('/import_excel',[OrderController::class,'import_excel'])->name('import_excel');
 
@@ -70,30 +69,13 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/auditor_orders_edit/{order}',[GroupOrderController::class,'auditor_orders_edit'])->name('auditor_orders_edit');
     Route::put('/auditor_orders_update/{order}',[GroupOrderController::class,'auditor_orders_update'])->name('auditor_orders_update');
 
-    Route::get('/share_orders',[PageController::class,'share_orders'])->name('share_orders');
+    Route::get('/share_orders/{mixin_single}',[PageController::class,'share_orders'])->name('share_orders');
 
     Route::get('/order_status/{auditor_status}',[PageController::class,'order_status'])->name('order_status')->middleware('role:admin');
     Route::get('/edit_order_status/{order}',[PageController::class,'edit_order_status'])->name('edit_order_status')->middleware('role:admin');
     Route::post('/update_order_status/{order}',[PageController::class,'update_order_status'])->name('update_order_status')->middleware('role:admin');
 
-    Route::get('/test', function (){
-        if(!Cache::has('orders')){
-
-            $data = \App\Models\Order::all();
-            Cache::put('orders', $data);
-
-        }else{
-
-            $orders = Cache::get('orders');
-
-        }
-
-       return view('test.index', compact('orders'));
-
-    });
-
-    Route::get('/delete_cache', function (){
-        Cache::delete('orders');
-    });
+    Route::get('/report', [ReportController::class, 'index'])->name('report');
+    Route::get('/edit_report/{order}', [ReportController::class, 'edit'])->name('report_edit');
 
 });

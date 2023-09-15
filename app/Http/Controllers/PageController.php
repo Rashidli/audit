@@ -7,7 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-
+use App\Services\MixinSingle;
 class PageController extends Controller
 {
 
@@ -30,12 +30,25 @@ class PageController extends Controller
 
     }
 
-    public function share_orders()
+    public function share_orders($mixin)
     {
 
+        $orders_count = 0;
+        $mixin_single = new MixinSingle();
+
+        if($mixin == 'single'){
+
+            $orders_count = $mixin_single->mixin_single('single')->where('is_new', true)->count();
+
+        }elseif ($mixin == 'mixin'){
+
+            $orders_count = $mixin_single->mixin_single('mixin')->where('is_new', true)->count();
+
+        }
+
         $groups = Group::with('orders')->get();
-        $orders_count = Order::where('is_new', true)->count();
-        return view('orders.share_orders',compact('groups','orders_count'));
+
+        return view('orders.share_orders',compact('groups','orders_count','mixin'));
 
     }
 
