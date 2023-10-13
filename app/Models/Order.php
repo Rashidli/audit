@@ -10,6 +10,7 @@ class Order extends Model
 {
 
     use HasFactory, SoftDeletes;
+
     protected $guarded = [];
 
     public function groups()
@@ -19,12 +20,26 @@ class Order extends Model
 
     public function masters()
     {
-        return $this->belongsToMany(Master::class);
+        return $this->belongsToMany(Master::class)->withTimestamps();
     }
 
     public function workers()
     {
-        return $this->belongsToMany(Worker::class);
+        return $this->belongsToMany(Worker::class)->withTimestamps();
     }
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class)->withPivot('answer')->withTimestamps();
+    }
+
+    public function images(){
+
+        return $this->hasMany(OrderImage::class,'order_id');
+
+    }
+
+
+
 
 }

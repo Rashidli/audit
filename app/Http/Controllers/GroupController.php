@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Carbon;
 class GroupController extends Controller
 {
 
@@ -21,15 +21,18 @@ class GroupController extends Controller
     public function index()
     {
 
-        $groups = Group::with('users')->get();
+        $groups = Group::with('users','orders')->get();
 
-        return view('groups.index', compact('groups'));
+        $today = Carbon::today();
+
+        return view('groups.index', compact('groups','today'));
 
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         return view('groups.create');
@@ -38,6 +41,7 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
 
@@ -68,7 +72,6 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-
         return view('groups.edit', compact('group'));
     }
 

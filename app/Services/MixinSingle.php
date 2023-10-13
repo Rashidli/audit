@@ -7,7 +7,7 @@ class MixinSingle  {
     {
 
 
-        $query = DB::table('orders')->where('deleted_at',  NULL);
+        $query = DB::table('orders')->where([['deleted_at',  NULL], ['auditor_status', false]]);
 
         if($orders){
             $query = $orders;

@@ -10,15 +10,17 @@
                                 @if(session('message'))
                                     <div class="alert alert-success">{{session('message')}}</div>
                                 @endif
-                                    <form id="fileUploadForm" action="{{route('import_excel')}}" enctype="multipart/form-data" method="post">
+                                    <form id="fileUploadForm" method="POST" action="{{route('insert_excel')}}" enctype="multipart/form-data" >
                                         @csrf
                                         <div class="row">
                                             <div class="col-4">
+
                                                 <div class="mb-3">
                                                     <label class=" col-form-label">Fayl</label>
-                                                    <input value="{{old('file')}}" id="fileInput" class="form-control" type="file" name="file">
-                                                    @if($errors->first('file')) <small class="form-text text-danger">{{$errors->first('file')}}</small> @endif
+                                                    <input id="fileInput" class="form-control" type="file" name="excel_file">
+{{--                                                    @if($errors->first('excel_file')) <small class="form-text text-danger">{{$errors->first('excel_file')}}</small> @endif--}}
                                                 </div>
+
                                                 <div class="progress_display form-group">
                                                     <div class="progress">
                                                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
@@ -30,6 +32,7 @@
                                                 <div class="mb-3">
                                                     <button type="submit" class="btn progress_button btn-primary">Import et</button>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </form>
@@ -52,7 +55,6 @@
                                             <th>Sifariş id</th>
                                             <th>Xidmət növü</th>
                                             <th>Sifarişin bitmə tarixi</th>
-                                            <th>Auditor status</th>
                                             <th>Auditor</th>
                                             <th>Əməliyyat</th>
                                         </tr>
@@ -65,7 +67,6 @@
                                                 <td>{{$order->order_id}}</td>
                                                 <td>{{$order->service_type}}</td>
                                                 <td>{{$order->order_end_date}}</td>
-                                                <td>{{$order->auditor_status}}</td>
                                                 <td>{{$order->auditor_name}}</td>
 
                                                 <td><a href="{{route('orders.edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>

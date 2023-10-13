@@ -52,9 +52,9 @@
                                                 <label class=" col-form-label" for="order_status">Sifariş statusu</label>
                                                 <select class="form-control" id="order_status" type="text" name="order_status">
                                                     <option selected value="">---</option>
-                                                    <option value="Yüngül" {{ request()->order_status == 'Yüngül' ? 'selected' : '' }}>Yüngül</option>
-                                                    <option value="Orta" {{ request()->order_status == 'Orta' ? 'selected' : '' }}>Orta</option>
-                                                    <option value="Ağır" {{ request()->order_status == 'Ağır' ? 'selected' : '' }}>Ağır</option>
+                                                    <option value="1" {{ request()->order_status == '1' ? 'selected' : '' }}>Yüngül</option>
+                                                    <option value="2" {{ request()->order_status == '2' ? 'selected' : '' }}>Orta</option>
+                                                    <option value="3" {{ request()->order_status == '3' ? 'selected' : '' }}>Ağır</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -65,16 +65,6 @@
                                                     <option selected value="">---</option>
                                                     <option value="mixin" {{ request()->mixin_single == 'mixin' ? 'selected' : '' }}>Mixin</option>
                                                     <option value="single" {{ request()->mixin_single == 'single' ? 'selected' : '' }}>Single</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="mb-3">
-                                                <label class="col-form-label" for="mixin_single">Auditor status</label>
-                                                <select class="form-control" id="mixin_single" name="auditor_status">
-                                                    <option selected value="">---</option>
-                                                    <option value="not_null" {{ request()->auditor_status == 'not_null' ? 'selected' : '' }}>İşlənmişlər</option>
-                                                    <option value="is_null" {{ request()->auditor_status == 'is_null' ? 'selected' : '' }}>İşlənməmişlər</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -121,7 +111,6 @@
                                             <th>Sifariş id</th>
                                             <th>Xidmət növü</th>
                                             <th>Sifarişin bitmə tarixi</th>
-                                            <th>Auditor status</th>
                                             <th>Auditor</th>
                                             <th>Əməliyyat</th>
                                         </tr>
@@ -135,7 +124,6 @@
                                                 <td>{{$order->order_id}}</td>
                                                 <td>{{$order->service_type}}</td>
                                                 <td>{{$order->order_end_date}}</td>
-                                                <td>{{$order->auditor_status}}</td>
                                                 <td>{{$order->auditor_name}}</td>
 
                                                 <td><a href="{{route('report_edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a></td>

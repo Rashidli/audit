@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Master;
 use App\Models\Order;
+use App\Models\Question;
+use App\Models\QuestionCat;
+use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +17,7 @@ class PageController extends Controller
 
     public function login()
     {
+
         return view('login');
 
     }
@@ -60,11 +65,11 @@ class PageController extends Controller
         $limit = $request->input('limit', 10);
         $text = $request->input('text');
 
-        $query = $group->orders()->where('auditor_status', null)
+        $query = $group->orders()->where('auditor_status', false)
             ->where('orders.order_id', 'like', '%' . $text . '%')
             ->orderBy('id', 'desc');
 
-        $orders = $group->orders()->where('auditor_status', null)
+        $orders = $group->orders()->where('auditor_status', false)
             ->where('orders.order_id', 'like', '%' . $text . '%')
             ->orderBy('id', 'desc')
             ->paginate($limit)
@@ -76,7 +81,6 @@ class PageController extends Controller
 
         return view('orders.group_orders', compact('orders','route','group','count'));
 
-
     }
 
     public function worked_group_orders(Request $request, $id)
@@ -86,11 +90,11 @@ class PageController extends Controller
         $limit = $request->input('limit', 10);
         $text = $request->input('text');
 
-        $query = $group->orders()->where('auditor_status', '!=' ,null)
+        $query = $group->orders()->where('auditor_status', true)
             ->where('orders.order_id', 'like', '%' . $text . '%')
             ->orderBy('id', 'desc');
 
-        $orders = $group->orders()->where('auditor_status', '!=' ,null)
+        $orders = $group->orders()->where('auditor_status', '!=' ,true)
             ->where('orders.order_id', 'like', '%' . $text . '%')
             ->orderBy('id', 'desc')
             ->paginate($limit)
@@ -103,10 +107,22 @@ class PageController extends Controller
         return view('orders.group_orders', compact('orders','route','group','count'));
     }
 
-    public function order_status(Request $request, $auditor_status)
+    public function order_status(Request $request, $auditor_status = null)
     {
 
-        $query = DB::table('orders')->where([['deleted_at', '=',  NULL ], ['auditor_status', '=', $auditor_status]]);
+        if(isset($auditor_status)){
+
+            $query = Order::whereHas('questions', function($q) use ($auditor_status){
+
+                $q->where('level', $auditor_status)->withTrashed();
+
+            })->where('auditor_status', true);
+
+        }else{
+
+            $query = Order::doesntHave('questions')->where([['auditor_status', true], ['auditor_note', '!=', null], ['satisfied_thick', false]]);
+
+        }
 
         $limit = $request->input('limit', 10);
         $text = $request->input('text');
@@ -133,18 +149,107 @@ class PageController extends Controller
 
     }
 
-    public function edit_order_status(Order $order)
+    public function satisfied_customers(Request $request)
     {
+        $query = Order::where([['auditor_status', true], ['satisfied_thick', true]]);
 
-        return view('order_status.edit', compact('order'));
+        $limit = $request->input('limit', 10);
+        $text = $request->input('text');
+        $table = 'orders';
+
+        if ($text) {
+
+            $query->where(function ($query) use ($text, $table) {
+                $columns = Schema::getColumnListing($table);
+
+                foreach ($columns as $column) {
+                    $query->orWhere($column, 'LIKE', '%' . $text . '%');
+                }
+            });
+
+        }
+
+        $route =  'satisfied_customers';
+
+        $count = count($query->get());
+        $orders = $query->orderBy('id', 'desc')->paginate($limit)->withQueryString();
+
+        return view('order_status.satisfied_customers', compact('orders','route','count'));
 
     }
 
-    public function update_order_status(Request $request,Order $order)
+    public function satisfied_customers_edit($id)
     {
-        $order->update($request->all());
 
+
+        $order = Order::withTrashed()
+            ->with(['questions' => function ($q)  {
+                $q->withTrashed();
+            }])
+            ->with('images')
+            ->with(['masters' => function ($q) {
+                $q->withTrashed();
+            }])
+            ->with(['workers' => function ($q) {
+                $q->withTrashed();
+            }])
+            ->findOrFail($id);
+
+        $question_cats = QuestionCat::with(['questions' => function ($q) {
+            $q->withTrashed();
+        }])->get();
+
+        $masters = Master::withTrashed()->get();
+
+        $workers = Worker::withTrashed()->get();
+
+        return view('order_status.satisfied_customers_edit', compact('order','masters','workers','question_cats'));
+
+    }
+
+    public function satisfied_customers_update(Request $request, Order $order)
+    {
+//        dd($request->all());
+        $order->update($request->all());
         return redirect()->back()->with('message', 'Məlumat update edildi.');
+    }
+
+    public function edit_order_status(Request $request)
+    {
+
+        $level_id = $request->level_id;
+
+        $order = Order::withTrashed()
+            ->with(['questions' => function ($q) use ($level_id) {
+                $q->withTrashed()->where('level', $level_id);
+            }])
+            ->with('images')
+            ->with(['masters' => function ($q) {
+                $q->withTrashed();
+            }])
+            ->with(['workers' => function ($q) {
+                $q->withTrashed();
+            }])
+            ->findOrFail($request->id);
+
+        $question_cats = QuestionCat::with(['questions' => function ($q) {
+            $q->withTrashed();
+        }])->get();
+
+        $masters = Master::withTrashed()->get();
+
+        $workers = Worker::withTrashed()->get();
+
+        return view('order_status.edit', compact('order','masters','workers','question_cats','level_id'));
+
+    }
+
+    public function update_order_status(Request $request, Order $order)
+    {
+        dd($request->all());
+        $order->update($request->all());
+        return redirect()->back()->with('message', 'Məlumat update edildi.');
+
     }
 
 }

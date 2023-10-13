@@ -12,9 +12,8 @@
 <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{asset('assets/libs/node-waves/waves.min.js')}}"></script>
 
-
 <!-- apexcharts -->
-<script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
+{{--<script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>--}}
 
 <!-- jquery.vectormap map -->
 <script src="{{asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
@@ -28,7 +27,7 @@
 <script src="{{asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
 
-<script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>
+{{--<script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>--}}
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <!-- App js -->
@@ -41,55 +40,108 @@
 
     $(document).ready(function (){
 
+        $("#create_order_auditor").submit(function(event) {
+            var serviceType = $("select[name='service_type']").val();
+
+            if (serviceType === null || serviceType === "----") {
+                alert("Xidmət növünü seçin.");
+
+                event.preventDefault();
+            }
+        });
+
+
+        $('.js-example-basic-single').select2();
+
         $('.js-example-basic-multiple').select2();
+
+        $('#my-checkbox').change(function() {
+            if ($(this).is(':checked')) {
+                $('#custom-input').removeAttr('name');
+            } else {
+                $('#custom-input').attr('name', 'custom_input_driver').val(0);
+            }
+        });
+
+        $('#my-checkbox1').change(function() {
+            if ($(this).is(':checked')) {
+                $('#custom-input3').removeAttr('name');
+            } else {
+                $('#custom-input3').attr('name', 'custom_input_worker').val(0);
+            }
+        });
+
+        $('#my-checkbox4').change(function() {
+            if ($(this).is(':checked')) {
+                $('#custom-input4').removeAttr('name');
+            } else {
+                $('#custom-input4').attr('name', 'custom_input_operator').val(0);
+            }
+        });
+
+        $('#my-checkbox2').change(function() {
+            if ($(this).is(':checked')) {
+                $('#custom-input2').removeAttr('name');
+            } else {
+                $('#custom-input2').attr('name', 'custom_input_master').val(0);
+            }
+        });
+
+        $('#my-checkbox5').change(function() {
+            if ($(this).is(':checked')) {
+                $('#custom-input4').removeAttr('name');
+            } else {
+                $('#custom-input4').attr('name', 'custom_input_satisfied').val(0);
+            }
+        });
 
     });
 
     $(function () {
         $(document).ready(function () {
 
-            $('#fileUploadForm').ajaxForm({
+             $('#fileUploadForm').ajaxForm({
 
-                beforeSubmit: function (formData, jqForm, options) {
+                 beforeSubmit: function (formData, jqForm, options) {
 
-                    if (!isValidFile()) {
-                        return false;
-                    }
-                    return true;
+                     if (!isValidFile()) {
+                         return false;
+                     }
+                     return true;
 
-                },
+                 },
 
-                beforeSend: function () {
+                 beforeSend: function () {
 
-                    var percentage = '0';
+                     var percentage = '0';
 
-                },
+                 },
 
-                complete: function (xhr) {
-                    if (xhr.status === 200) {
-                        sessionStorage.setItem('showSuccess', 'true');
-                        location.reload();
-                    }
-                },
-
-
-                uploadProgress: function (event, position, total, percentComplete){
-
-                    if (isValidFile()) {
-
-                        $('.progress_button').css('pointer-events','none');
-                        $('.progress_display').css('display','block');
-                        var percentage = percentComplete;
-                        $('.progress .progress-bar').css("width", percentage+'%', function() {
-                            return $(this).attr("aria-valuenow", percentage) + "%";
-                        })
-
-                    }
-
-                },
+                 complete: function (xhr) {
+                     if (xhr.status === 200) {
+                         sessionStorage.setItem('showSuccess', 'true');
+                         location.reload();
+                     }
+                 },
 
 
-            });
+                 uploadProgress: function (event, position, total, percentComplete){
+
+                     if (isValidFile()) {
+
+                         $('.progress_button').css('pointer-events','none');
+                         $('.progress_display').css('display','block');
+                         var percentage = percentComplete;
+                         $('.progress .progress-bar').css("width", percentage+'%', function() {
+                             return $(this).attr("aria-valuenow", percentage) + "%";
+                         })
+
+                     }
+
+                 },
+
+
+             });
 
 
         });
@@ -104,7 +156,7 @@
             }
 
 
-            var allowedExtensions = ['xlsx', 'xltx', 'xls', 'xlsb', 'xlsm'];
+            var allowedExtensions = ['xlsx'];
             var fileExtension = file.name.split('.').pop().toLowerCase();
 
             if ($.inArray(fileExtension, allowedExtensions) === -1) {
@@ -113,8 +165,10 @@
             }
 
             return true;
+
         }
     });
+
     $(document).ready(function() {
 
         if (sessionStorage.getItem('showSuccess')) {
@@ -123,6 +177,7 @@
         }
 
     });
+
 </script>
 </body>
 

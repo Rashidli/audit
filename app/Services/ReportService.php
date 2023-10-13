@@ -9,7 +9,6 @@ class ReportService{
     {
         $limit = $request->input('limit', 10);
         $mixin_single = $request->input('mixin_single');
-        $auditor_status = $request->input('auditor_status');
         $order_status = $request->input('order_status');
         $group_id = $request->input('group_id');
         $auditor_title = $request->input('auditor_title');
@@ -18,7 +17,7 @@ class ReportService{
         $end_date = $request->input('end_date');
         $table = 'orders';
 
-        $query =Order::whereNull('deleted_at')->where('is_new', false);
+        $query =Order::where('auditor_status', true)->where('is_new', false);
 
         if($start_date || $end_date){
 
@@ -49,21 +48,16 @@ class ReportService{
             }
         }
 
-        if($order_status){
-            $query->where('auditor_status', $order_status);
-        }
-
         if($auditor_title){
             $query->where('auditor_name', $auditor_title);
         }
 
+        if($order_status){
+            $query->whereHas('questions', function($q) use ($order_status){
 
-        if($auditor_status){
-            if($auditor_status == 'is_null'){
-                $query->whereNull('auditor_status');
-            }elseif ($auditor_status == 'not_null'){
-                $query->whereNotNull('auditor_status');
-            }
+                $q->where('level', $order_status);
+
+            });
         }
 
         if($group_id){

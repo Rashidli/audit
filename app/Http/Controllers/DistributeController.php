@@ -15,8 +15,8 @@ class DistributeController extends Controller
     {
 
         $mixin_single = new MixinSingle();
-        $newOrders = $mixin_single->mixin_single($request->mixin)->take($request->number)->where('is_new', true)->get();
-//        dd($newOrders);
+        $newOrders = $mixin_single->mixin_single($request->mixin)->take($request->number)->where([['is_new', true],['auditor_status',false]])->get();
+
 
         if ($newOrders->count() == 0) {
 
@@ -60,7 +60,7 @@ class DistributeController extends Controller
         $group = Group::with('orders')->where('id', $request->group_id)->first();
 
         $mixin_single = new MixinSingle();
-        $group_orders = $mixin_single->mixin_single($request->mixin, $group->orders())->take($request->number)->where('auditor_status', null)->get();
+        $group_orders = $mixin_single->mixin_single($request->mixin, $group->orders())->take($request->number)->where('auditor_status', false)->get();
 
 //        dd($group_orders);
 

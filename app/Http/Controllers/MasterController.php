@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MastersImport;
 use App\Models\Master;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MasterController extends Controller
 {
@@ -14,6 +16,15 @@ class MasterController extends Controller
         $this->middleware('permission:create-masters', ['only' => ['create','store']]);
         $this->middleware('permission:edit-masters', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-masters', ['only' => ['destroy']]);
+
+    }
+
+    public function import_masters(Request $request)
+    {
+
+        Excel::import(new MastersImport, $request->excel_file);
+
+        return redirect()->back()->with('success', 'Upload successful');
 
     }
 

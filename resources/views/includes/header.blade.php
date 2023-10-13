@@ -192,9 +192,11 @@ X
                                 <span>İşlənmiş sifarişlər</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{route('order_status','Yüngül')}}">Yüngül</a></li>
-                                <li><a href="{{route('order_status','Orta')}}">Orta</a></li>
-                                <li><a href="{{route('order_status','Ağır')}}">Ağır</a></li>
+                                <li><a href="{{route('order_status','1')}}">Yüngül</a></li>
+                                <li><a href="{{route('order_status','2')}}">Orta</a></li>
+                                <li><a href="{{route('order_status','3')}}">Ağır</a></li>
+                                <li><a href="{{route('order_status')}}">Açıqlar</a></li>
+                                <li><a href="{{route('satisfied_customers')}}">Müştəri razı</a></li>
                             </ul>
                         </li>
                     @endif
@@ -208,6 +210,9 @@ X
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{route('masters.index')}}">Ustalar</a></li>
                                 <li><a href="{{route('workers.index')}}">Köməkçilər</a></li>
+                                <li><a href="{{route('drivers.index')}}">Sürücülər</a></li>
+                                <li><a href="{{route('question_cats.index')}}">Sual kateqoriyaları</a></li>
+                                <li><a href="{{route('questions.index')}}">Suallar</a></li>
                             </ul>
                         </li>
                     @endif

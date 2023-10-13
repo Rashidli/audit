@@ -9,7 +9,7 @@ class SearchService
 
     public function getData($request,$table){
 
-        $query = DB::table($table)->where('deleted_at',  NULL);
+        $query = DB::table($table)->where('auditor_status',  false)->where('is_new', true)->where('deleted_at', NUll);
         $limit = $request->input('limit', 10);
         $is_new = $request->input('is_new');
         $date = $request->input('date');

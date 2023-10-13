@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\Master;
 use App\Models\Order;
+use App\Models\QuestionCat;
 use App\Models\User;
 use App\Models\Worker;
 use App\Services\ReportService;
@@ -16,10 +17,9 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
+
         $filter = new ReportService();
         $data = $filter->filter($request);
-
-
 
         $auditors = DB::table('users')->whereNotNull('group_id')->get();
 
@@ -29,13 +29,31 @@ class ReportController extends Controller
 
     }
 
-    public function edit(Order $order)
+    public function edit($id)
     {
 
-        $masters = Master::all();
-        $workers = Worker::all();
+        $order = Order::withTrashed()
+            ->with(['questions' => function ($q) {
+                $q->withTrashed();
+            }])
+            ->with('images')
+            ->with(['masters' => function ($q) {
+                $q->withTrashed();
+            }])
+            ->with(['workers' => function ($q) {
+                $q->withTrashed();
+            }])
+            ->findOrFail($id);
 
-        return view('reports.edit', compact('order','masters','workers'));
+        $question_cats = QuestionCat::with(['questions' => function ($q) {
+            $q->withTrashed();
+        }])->get();
+
+        $masters = Master::withTrashed()->get();
+
+        $workers = Worker::withTrashed()->get();
+
+        return view('reports.edit', compact('order','masters','workers','question_cats'));
 
     }
 }

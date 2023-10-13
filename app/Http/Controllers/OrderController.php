@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\OrdersImport;
 use App\Models\Order;
-use App\Services\FileService;
 use App\Services\MixinSingle;
 use App\Services\SearchService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 class OrderController extends Controller
 {
     public $searchService;
@@ -33,10 +33,9 @@ class OrderController extends Controller
         $route = 'orders.index';
 
         $mixin_single = new MixinSingle();
-        $single_count = $mixin_single->mixin_single('single')->where('is_new', true)->count();
-//        dd($mixin_single->mixin_single('single')->where('id', 71979)->get());
-        $mixin_count = $mixin_single->mixin_single('mixin')->where('is_new', true)->count();
 
+        $single_count = $mixin_single->mixin_single('single')->where('is_new', true)->count();
+        $mixin_count = $mixin_single->mixin_single('mixin')->where('is_new', true)->count();
 
         return view('orders.index', compact('data','route','single_count','mixin_count'));
 
@@ -118,74 +117,78 @@ class OrderController extends Controller
 
     }
 
-    public function import_excel(Request $request)
+    public function insert_excel(Request $request)
     {
 
+        Order::query()->where('auditor_status',false)->delete();
 
-        try {
+        Excel::import(new OrdersImport, $request->excel_file);
 
-            if ($request->has('file')) {
-                $reader = new Xlsx();
-                $spreadsheet = $reader->load($request->file);
-                $worksheet = $spreadsheet->getActiveSheet();
-                $worksheet_arr = $worksheet->toArray();
+        // try {
 
-                // Remove header row
-                unset($worksheet_arr[0]);
+        //     if ($request->hasFile('excel_file')) {
+        //         $reader = new Xlsx();
+        //         $spreadsheet = $reader->load($request->file('excel_file'));
+        //         $worksheet = $spreadsheet->getActiveSheet();
+        //         $worksheet_arr = $worksheet->toArray();
 
-                foreach ($worksheet_arr as $row) {
-                    // Check if the order_id already exists
-                    $existingOrder = Order::where('order_id', $row[2])->first();
+        //         unset($worksheet_arr[0]);
 
-                    if (!$existingOrder) {
-                        // If the order_id doesn't exist, create a new order
-                        $order = new Order();
-                        $order->order_number = $row[0];
-                        $order->order_date = date("Y-m-d", strtotime($row[1]));
-                        $order->order_id = $row[2];
-                        $order->service_type = $row[3];
-                        $order->phone_2 = $row[4];
-                        $order->service_note = $row[5];
-                        $order->call_date = $row[6];
-                        $order->order_end_date = $row[7];
-                        $order->customer_name = $row[8];
-                        $order->phone = $row[9];
-                        $order->corporate = $row[10];
-                        $order->operator = $row[11];
-                        $order->order_status = $row[12];
-                        $order->oz_tutma = $row[13];
-                        $order->amount = $row[14];
-                        $order->driver = $row[15];
-                        $order->reason_of_cancel = $row[16];
-                        $order->driver_amount = $row[17] ?? 0;
-                        $order->master = $row[18] ?? 0;
-                        $order->worker = $row[19] ?? 0;
-                        $order->additional_service = $row[20];
-                        $order->department = $row[21];
-                        $order->satisfaction_status = $row[22];
-                        $order->address = $row[23];
-                        $order->speaking_duration = $row[24];
-                        $order->note = $row[25];
+        //         foreach ($worksheet_arr as $row) {
 
-                        $order->save();
+        //             $existingOrder = Order::where('order_id', $row[2])->first();
 
-                    }
-                }
-            }
+        //             if (!$existingOrder) {
 
-            DB::commit();
+        //                 $order = new Order();
+        //                 $order->order_number = $row[0];
+        //                 $order->order_date = date("Y-m-d", strtotime($row[1]));
+        //                 $order->order_id = $row[2];
+        //                 $order->service_type = $row[3];
+        //                 $order->phone_2 = $row[4];
+        //                 $order->service_note = $row[5];
+        //                 $order->call_date = $row[6];
+        //                 $order->order_end_date = $row[7];
+        //                 $order->customer_name = $row[8];
+        //                 $order->phone = $row[9];
+        //                 $order->corporate = $row[10];
+        //                 $order->operator = $row[11];
+        //                 $order->order_status = $row[12];
+        //                 $order->oz_tutma = $row[13];
+        //                 $order->amount = $row[14];
+        //                 $order->driver = $row[15];
+        //                 $order->reason_of_cancel = $row[16];
+        //                 $order->driver_amount = $row[17] ?? 0;
+        //                 $order->master = $row[18] ?? 0;
+        //                 $order->worker = $row[19] ?? 0;
+        //                 $order->additional_service = $row[20];
+        //                 $order->department = $row[21];
+        //                 $order->satisfaction_status = $row[22];
+        //                 $order->address = $row[23];
+        //                 $order->speaking_duration = $row[24];
+        //                 $order->note = $row[25];
 
-            $uploadFile = new FileService();
-            $uploadFile->uploadFile($request->file, 'excels');
+        //                 $order->save();
 
-            return response()->json(['success'=>'You have successfully upload file.']);
+        //             }
+        //         }
+        //     }else {
 
-        }catch (\Exception $e){
+        //         return response()->json(['error' => 'No file uploaded.']);
 
-            DB::rollBack();
-            return response()->json(['error'=>$e->getMessage()]);
+        //     }
 
-        }
+        //     DB::commit();
+
+
+        //     return response()->json(['success'=>'You have successfully upload file.']);
+
+        // }catch (\Exception $e){
+
+        //     DB::rollBack();
+        //     return response()->json(['error' => $e->getMessage()]);
+
+        // }
 
     }
 

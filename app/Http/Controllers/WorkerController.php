@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\WorkersImport;
 use App\Models\Worker;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WorkerController extends Controller
 {
@@ -14,6 +16,16 @@ class WorkerController extends Controller
         $this->middleware('permission:create-workers', ['only' => ['create','store']]);
         $this->middleware('permission:edit-workers', ['only' => ['edit','update']]);
         $this->middleware('permission:delete-workers', ['only' => ['destroy']]);
+
+    }
+
+    public function import_workers(Request $request)
+    {
+
+
+        Excel::import(new WorkersImport, $request->excel_file);
+
+        return redirect()->back()->with('success', 'Upload successful');
 
     }
 

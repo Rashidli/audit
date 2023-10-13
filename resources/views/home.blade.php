@@ -21,6 +21,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- end page title -->
 
             <div class="row">
@@ -29,8 +30,8 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="flex-grow-1">
-                                    <p class="text-truncate font-size-14 mb-2">Sifariş sayı</p>
-                                    <h4 class="mb-2">{{$customer_count}}</h4>
+                                    <p class="text-truncate font-size-14 mb-2">Audit program</p>
+                                    <h4 class="mb-2">Audit program</h4>
                                 </div>
 
                                 <div class="avatar-sm">
@@ -45,7 +46,6 @@
 
             </div>
             <!-- end row -->
-
 
         </div>
 

@@ -13,12 +13,13 @@
                             @endif
 
                             <h4 class="card-title">Sifarişlər</h4>
+                                <a href="{{route('auditor_create_order')}}" class="btn btn-primary">Yeni sifariş yarat</a>
 
                             <form action="{{route($route, $group->id)}}" method="get">
                                 <div class="row">
-                                    <div class="col-3 col-md-3">
+                                    <div class="col-md-2 col-sm-6">
                                         <div class="mb-3">
-                                            <label class=" col-form-label">Limit</label>
+                                            <label class="col-form-label">Limit</label>
                                             <select class="form-control" type="text" name="limit">
                                                 <option value="10" {{ request()->limit == 10 ? 'selected' : '' }}>10</option>
                                                 <option value="25" {{ request()->limit == 25 ? 'selected' : '' }}>25</option>
@@ -28,21 +29,32 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-3 col-md-3">
+                                    <div class="col-md-2 col-sm-6">
                                         <div class="mb-3">
                                             <label class="col-form-label">Sifariş id görə</label>
-                                            <input class="form-control" value="{{ request()->text}}" id="text" type="text" name="text">
+                                            <input class="form-control" value="{{ request()->order_id}}" id="text" type="text" name="order_id">
                                         </div>
                                     </div>
-                                    <div class="col-1 col-md-3">
+                                    <div class="col-md-2 col-sm-6">
                                         <div class="mb-3">
-                                            <div class="pt-4 mt-3">
-                                                <button value="submit" class="btn btn-primary">Axtar</button>
-                                            </div>
+                                            <label class="col-form-label">Ünvan</label>
+                                            <input class="form-control" value="{{ request()->address}}" id="text" type="text" name="address">
                                         </div>
                                     </div>
-                                    <div class="col-2 col-md-3">
+                                    <div class="col-md-2 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Sürücü adı</label>
+                                            <input class="form-control" value="{{ request()->driver_name}}" id="text" type="text" name="driver_name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6">
+                                        <div class="pt-4 mt-3">
+                                            <button value="submit" class="btn btn-primary">Axtar</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6">
                                         <div class="mb-3" style="display: flex; justify-content: space-between">
+
                                             <div class="pt-4 mt-3">
                                                 <a class="btn btn-primary" href="{{route($route, $group->id)}}">Sıfırla</a>
                                             </div>
@@ -50,11 +62,10 @@
                                                 <p class="text-primary">Nəticə: {{$count}}</p>
                                             </div>
                                         </div>
-{{--                                        <div class="mb-3">--}}
-{{--                                            --}}
-{{--                                        </div>--}}
                                     </div>
                                 </div>
+
+
                             </form>
 
                             <div class="table-responsive">
@@ -62,26 +73,20 @@
 
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Sifariş tarixi</th>
+
                                         <th>Sifariş id</th>
                                         <th>Ünvan</th>
                                         <th>Sürücü</th>
-                                        <th>Sifarişin bitmə tarixi</th>
-                                        <th>Müştəri</th>
+
                                         <th>Əməliyyat</th>
                                     </tr>
                                     </thead>
                                     <tbody id="results">
                                     @foreach($orders as $order)
                                         <tr>
-                                            <th scope="row">{{$order->order_number}}</th>
-                                            <td>{{$order->order_date}}</td>
                                             <td>{{$order->order_id}}</td>
                                             <td>{{$order->address}}</td>
                                             <td>{{$order->driver}}</td>
-                                            <td>{{$order->order_end_date}}</td>
-                                            <td>{{$order->customer_name}}</td>
 
                                             <td>
                                                 <a href="{{route('auditor_orders_edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
