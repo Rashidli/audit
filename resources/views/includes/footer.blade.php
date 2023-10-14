@@ -40,15 +40,15 @@
 
     $(document).ready(function (){
 
-        $("#create_order_auditor").submit(function(event) {
-            var serviceType = $("select[name='service_type']").val();
-
-            if (serviceType === null || serviceType === "----") {
-                alert("Xidmət növünü seçin.");
-
-                event.preventDefault();
-            }
-        });
+        // $("#create_order_auditor").submit(function(event) {
+        //     var serviceType = $("select[name='service_type']").val();
+        //
+        //     if (serviceType === null || serviceType === "----") {
+        //         alert("Xidmət növünü seçin.");
+        //
+        //         event.preventDefault();
+        //     }
+        // });
 
 
         $('.js-example-basic-single').select2();

@@ -21,10 +21,8 @@
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Xidmət növü</label>
-                                    <select name="service_type" class="form-control" required>
-                                        <option selected disabled>----</option>
-                                        <option value="Yükdaşıma">Yükdaşıma</option>
-                                        <option value="Evakuasiya">Evakuasiya</option>
+                                    <select name="service_type" class="form-control">
+                                        <option value="Yükdaşıma" selected>Yükdaşıma</option>
                                     </select>
                                 </div>
                             </div>
@@ -226,117 +224,6 @@
                                     <input  class="form-control" type="text" name="corporate">
                                 </div>
                             </div>
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Sifariş nömrəsi</label>--}}
-{{--                                    <input class="form-control" type="text" name="order_number">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class=" col-form-label">Telefon 2</label>--}}
-{{--                                    <input class="form-control" type="text" name="phone_2">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Sifariş qeydi</label>--}}
-{{--                                    <input  class="form-control" type="text" name="service_note" >--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Zəng tarixi</label>--}}
-{{--                                    <input class="form-control" type="text" name="call_date">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class=" col-form-label">Sifarişin bitmə tarixi</label>--}}
-{{--                                    <input  class="form-control" type="text" name="order_end_date">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Müştəri</label>--}}
-{{--                                    <input  class="form-control" type="text" name="customer_name" >--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class=" col-form-label">Telefon</label>--}}
-{{--                                    <input  class="form-control" type="text" name="phone" >--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Öz tutma</label>--}}
-{{--                                    <input  class="form-control" type="text" name="oz_tutma">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">İmtina səbəbi</label>--}}
-{{--                                    <input class="form-control" type="text" name="reason_of_cancel">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Əlavə xidmət</label>--}}
-{{--                                    <input  class="form-control" type="text" name="additional_service">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Şöbə</label>--}}
-{{--                                    <input  class="form-control" type="text" name="department">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class=" col-form-label">Məmnuniyyət statusu</label>--}}
-{{--                                    <input class="form-control" type="text" name="satisfaction_status">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class=" col-form-label">Danışıq müddəti(san)</label>--}}
-{{--                                    <input class="form-control" type="text" name="speaking_duration">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="col-form-label">Qeyd</label>--}}
-{{--                                    <input  class="form-control" type="text" name="note">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">--}}
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class=" col-form-label">Auditor</label>--}}
-{{--                                    <input  class="form-control" type="text" name="auditor_name">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
 
                        <input type="hidden" value="1" name="auditor_status">
 

@@ -13,7 +13,8 @@
                             @endif
 
                             <h4 class="card-title">Sifarişlər</h4>
-                                <a href="{{route('auditor_create_order')}}" class="btn btn-primary">Yeni sifariş yarat</a>
+                                <a href="{{route('auditor_create_order')}}" class="btn btn-primary">Yeni yükdaşıma sifarişi yarat</a>
+                                <a href="{{route('evakuasiya_create_order')}}" class="btn btn-primary">Yeni evakuasiya sifarişi yarat</a>
 
                             <form action="{{route($route, $group->id)}}" method="get">
                                 <div class="row">

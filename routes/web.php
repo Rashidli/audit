@@ -78,6 +78,7 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/auditor_orders_edit/{order}',[GroupOrderController::class,'auditor_orders_edit'])->name('auditor_orders_edit');
     Route::put('/auditor_orders_update/{order}',[GroupOrderController::class,'auditor_orders_update'])->name('auditor_orders_update');
     Route::get('/auditor_create_order',[GroupOrderController::class,'auditor_create_order'])->name('auditor_create_order');
+    Route::get('/evakuasiya_create_order',[GroupOrderController::class,'evakuasiya_create_order'])->name('evakuasiya_create_order');
     Route::post('/auditor_store_order',[GroupOrderController::class,'auditor_store_order'])->name('auditor_store_order');
 
     Route::get('/share_orders/{mixin_single}',[PageController::class,'share_orders'])->name('share_orders');
@@ -91,5 +92,6 @@ Route::group(['middleware' =>'auth'], function (){
 
     Route::get('/report', [ReportController::class, 'index'])->name('report');
     Route::get('/edit_report/{order}', [ReportController::class, 'edit'])->name('report_edit');
+    Route::get('/report_export',[ReportController::class,'export'])->name('report_export');
 
 });

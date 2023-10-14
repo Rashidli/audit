@@ -372,6 +372,25 @@
                                     <textarea readonly style="width: 100%"  class="form-control" type="text" name="auditor_note">{{$order->auditor_note}}</textarea>
                                 </div>
                             </div>
+
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="row">
+                                    <div class="col-4 col-md-4 col-lg-4">
+                                        <div class="mb-3">
+                                            <label class="col-form-label">Müştəri razıdır?</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 col-md-1 col-lg-1">
+                                        <div class="mt-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="my-checkbox5"  value="1" name="satisfied_thick" {{$order->satisfied_thick ? 'checked' : ''}}>
+                                                <input type="text" id="custom-input4" value="0" name="custom_input_satisfied" style="display: none;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             @if($order->images)
                                 <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                     <div class="mb-3">

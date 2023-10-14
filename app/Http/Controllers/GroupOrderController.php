@@ -16,10 +16,26 @@ use Illuminate\Support\Facades\DB;
 class GroupOrderController extends Controller
 {
 
+    public function evakuasiya_create_order()
+    {
+
+        $question_cats = QuestionCat::with('questions')
+            ->whereNotIn('id', [3, 4])
+            ->get();
+
+        $groups = Group::all();
+        $drivers = Driver::all();
+
+        return view('group_orders.evakuasiya_create', compact('question_cats','groups','drivers'));
+
+    }
+
     public function auditor_create_order()
     {
 
-        $question_cats = QuestionCat::with('questions')->get();
+        $question_cats = QuestionCat::with('questions')
+            ->whereNotIn('id', [8])
+            ->get();
 
         $masters = Master::all();
         $workers = Worker::all();
@@ -32,10 +48,7 @@ class GroupOrderController extends Controller
 
     public function auditor_store_order(Request $request)
     {
-
-
-//        dd($request->all());
-
+        DB::beginTransaction();
         try {
 
             $data = $request->except(['worker','master','driver_amount','masters', 'workers', 'auditor_name','auditor_images','answers','worker_thick','master_thick','worker_thick','operator_thick','custom_input_operator','custom_input_worker','custom_input_master','custom_input_driver','satisfied_thick','custom_input_satisfied']);
@@ -101,7 +114,6 @@ class GroupOrderController extends Controller
                 DB::table('order_question')->insert($answers_list);
             }
 
-//            DB::table('master_order')->where('order_id', $order->id)->delete();
             if($request->masters){
                 $masters_list = [];
                 foreach ($request->masters as $master){
@@ -110,7 +122,6 @@ class GroupOrderController extends Controller
                 DB::table('master_order')->insert($masters_list);
             }
 
-//            DB::table('order_worker')->where('order_id', $order->id)->delete();
             if($request->workers){
                 $workers_list = [];
                 foreach ($request->workers as $worker){
@@ -119,7 +130,6 @@ class GroupOrderController extends Controller
                 DB::table('order_worker')->insert($workers_list);
             }
 
-//            DB::table('order_images')->where('order_id', $order->id)->delete();
             if($request->auditor_images){
                 $auditor_images = [];
                 foreach ($request->auditor_images as $image){
@@ -232,7 +242,7 @@ class GroupOrderController extends Controller
     public function auditor_orders_update(Request $request, Order $order)
     {
 
-//        dd($request->all());
+        DB::beginTransaction();
 
         try {
 

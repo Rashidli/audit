@@ -12,11 +12,13 @@ use App\Services\ReportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrdersExport;
 class ReportController extends Controller
 {
     public function index(Request $request)
     {
+
 
         $filter = new ReportService();
         $data = $filter->filter($request);
@@ -55,5 +57,10 @@ class ReportController extends Controller
 
         return view('reports.edit', compact('order','masters','workers','question_cats'));
 
+    }
+
+    public function export()
+    {
+        return Excel::download(new OrdersExport, 'orders.xlsx');
     }
 }

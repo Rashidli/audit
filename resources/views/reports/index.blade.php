@@ -100,23 +100,24 @@
 
                                     </div>
                                 </form>
-
+                                <a class="btn btn-primary" href="{{route('report_export')}}">export</a>
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
 
                                         <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Sifariş tarixi</th>
-                                            <th>Sifariş id</th>
-                                            <th>Xidmət növü</th>
-                                            <th>Sifarişin bitmə tarixi</th>
-                                            <th>Auditor</th>
-                                            <th>Əməliyyat</th>
-                                        </tr>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Sifariş tarixi</th>
+                                                <th>Sifariş id</th>
+                                                <th>Xidmət növü</th>
+                                                <th>Sifarişin bitmə tarixi</th>
+                                                <th>Auditor</th>
+                                                <th>Əməliyyat</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="results">
                                         @foreach($data['items'] as $order)
+
                                             <tr>
 
                                                 <th scope="row">{{$order->order_number}}</th>
@@ -127,6 +128,7 @@
                                                 <td>{{$order->auditor_name}}</td>
 
                                                 <td><a href="{{route('report_edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a></td>
+
                                             </tr>
 
                                         @endforeach
