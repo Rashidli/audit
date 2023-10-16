@@ -72,21 +72,21 @@
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <label class="col-form-label">Başlanğıc tarix</label>
-                                                <input class="form-control" value="{{ request()->start_date }}" type="date" name="start_date">
+                                                <input class="form-control" id="start_date" value="{{ request()->start_date }}" type="date" name="start_date">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <label class="col-form-label">Son tarix</label>
-                                                <input class="form-control" value="{{ request()->end_date }}" type="date" name="end_date">
+                                                <input class="form-control" id="end_date" value="{{ request()->end_date }}" type="date" name="end_date">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <label class="col-form-label">Text</label>
-                                                <input class="form-control" value="{{ request()->text}}" type="text" name="text">
+                                                <input class="form-control" id="text" value="{{ request()->text}}" type="text" name="text">
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -97,10 +97,13 @@
                                                 <span class="text-primary">Nəticə: {{$data['count']}}</span>
                                             </div>
                                         </div>
-
                                     </div>
                                 </form>
-                                <a class="btn btn-primary" href="{{route('report_export')}}">export</a>
+
+                                <button class="btn btn-primary" id="excel_export" type="button">export</button>
+
+                                <br>
+                                <br>
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
 
@@ -115,6 +118,7 @@
                                                 <th>Əməliyyat</th>
                                             </tr>
                                         </thead>
+
                                         <tbody id="results">
                                         @foreach($data['items'] as $order)
 

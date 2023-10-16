@@ -40,6 +40,27 @@
 
     $(document).ready(function (){
 
+        $('#excel_export').click(function (){
+
+
+            var filters = {
+                group_id: $('select[name="group_id"]').val(),
+                auditor_title: $('select[name="auditor_title"]').val(),
+                order_status: $('select[name="order_status"]').val(),
+                mixin_single: $('select[name="mixin_single"]').val(),
+                start_date: $('input[name="start_date"]').val(),
+                end_date: $('input[name="end_date"]').val(),
+                text: $('input[name="text"]').val()
+            };
+
+            var queryParams = $.param(filters);
+
+            window.location.href = '/report_export?' + queryParams;
+
+
+
+        })
+
         // $("#create_order_auditor").submit(function(event) {
         //     var serviceType = $("select[name='service_type']").val();
         //

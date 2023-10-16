@@ -10,38 +10,25 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 class OrdersExport implements FromCollection,WithHeadings
 {
 
     use Exportable;
 
-//    public function query()
-//    {
-//        return Order::query()
-//            ->where('auditor_status', true)
-//            ->where('is_new', false)
-//            ->select('order_number','order_id','order_date')
-//            ->with('masters', 'workers', 'questions');
-//    }
-//
-//    public function map($order): array
-//    {
-//        return[
-//            $order->order_number,
-//            $order->order_id,
-//            $order->order_date,
-//            $order->masters->pluck('title')->implode(', '),
-//            $order->workers->pluck('title')->implode(', '),
-//            $order->questions->pluck('title')->implode(', '),
-//        ];
-//    }
+    private $orders;
+
+    public function __construct($orders)
+    {
+        $this->orders = $orders;
+    }
+
 
     public function collection()
     {
 
-        $orders = Order::where('auditor_status', true)
-            ->where('is_new', false)
-            ->with('masters', 'workers','questions')->get();
+        $orders = $this->orders;
 
         $data = [];
 

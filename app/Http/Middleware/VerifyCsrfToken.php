@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'import_excel'
+        'import_excel',
+        'report_export'
     ];
 }

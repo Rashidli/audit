@@ -16,20 +16,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\OrdersExport;
 class ReportController extends Controller
 {
-    public function index(Request $request)
-    {
-
-
-        $filter = new ReportService();
-        $data = $filter->filter($request);
-
-        $auditors = DB::table('users')->whereNotNull('group_id')->get();
-
-        $groups = Group::with('users')->get();
-
-        return view('reports.index', compact('groups','auditors','data'));
-
-    }
 
     public function edit($id)
     {
@@ -59,8 +45,34 @@ class ReportController extends Controller
 
     }
 
-    public function export()
+    public function index(Request $request)
     {
-        return Excel::download(new OrdersExport, 'orders.xlsx');
+
+        $filter = new ReportService();
+        $data = $filter->filter($request);
+
+        $auditors = DB::table('users')->whereNotNull('group_id')->get();
+
+        $groups = Group::with('users')->get();
+
+        return view('reports.index', compact('groups','auditors','data'));
+
     }
+
+    public function export(Request $request)
+    {
+
+        $filter = new ReportService();
+
+        $orders = $filter->forExcel($request);
+
+        return Excel::download(new OrdersExport($orders), 'orders.xlsx');
+
+    }
+
+//    public function export_excel_new(Request $request)
+//    {
+//        return Excel::download(new OrdersExport($orders), 'orders.xlsx');
+//    }
+
 }
