@@ -30,7 +30,7 @@
                                     <div class="alert alert-success">{{session('message')}}</div>
                                 @endif
                                 <h4 class="card-title">Köməkçilər</h4>
-                                        <a href="{{route('workers.create')}}" class="btn btn-primary">+</a>
+{{--                                        <a href="{{route('workers.create')}}" class="btn btn-primary">+</a>--}}
                                 <br>
                                 <br>
 
@@ -51,7 +51,7 @@
                                                 <th scope="row">{{$worker->number}}</th>
                                                 <td>{{$worker->title}}</td>
                                                 <td>
-                                                    <a href="{{route('workers.edit',$worker->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
+{{--                                                    <a href="{{route('workers.edit',$worker->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>--}}
                                                     <form action="{{route('workers.destroy', $worker->id)}}" method="post" style="display: inline-block">
                                                         {{ method_field('DELETE') }}
                                                         @csrf

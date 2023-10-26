@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use App\Models\Group;
 use App\Models\Master;
 use App\Models\Order;
@@ -41,7 +42,9 @@ class ReportController extends Controller
 
         $workers = Worker::withTrashed()->get();
 
-        return view('reports.edit', compact('order','masters','workers','question_cats'));
+        $drivers = Driver::withTrashed()->get();
+
+        return view('reports.edit', compact('order','masters','workers','question_cats','drivers'));
 
     }
 

@@ -58,7 +58,6 @@
             window.location.href = '/report_export?' + queryParams;
 
 
-
         })
 
         // $("#create_order_auditor").submit(function(event) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use App\Models\Group;
 use App\Models\Master;
 use App\Models\Order;
@@ -240,12 +241,15 @@ class PageController extends Controller
 
         $workers = Worker::withTrashed()->get();
 
-        return view('order_status.edit', compact('order','masters','workers','question_cats','level_id'));
+        $drivers = Driver::withTrashed()->get();
+
+        return view('order_status.edit', compact('order','masters','workers','question_cats','level_id','drivers'));
 
     }
 
     public function update_order_status(Request $request, Order $order)
     {
+
         dd($request->all());
         $order->update($request->all());
         return redirect()->back()->with('message', 'Məlumat update edildi.');

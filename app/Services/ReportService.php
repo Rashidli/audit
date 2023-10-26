@@ -115,6 +115,7 @@ class ReportService{
                         ->orWhere([['worker','>',0],['master','=',0],['driver_amount','=',0]])
                         ->orWhere([['worker','=',0],['master','>',0],['driver_amount','=',0]])
                         ->orWhere([['worker','=',0],['master','=',0],['driver_amount','>',0]]);
+
                 });
 
             }elseif ($mixin_single == 'mixin'){
@@ -125,6 +126,7 @@ class ReportService{
                         ->orWhere([['worker','>',0],['master','>',0],['driver_amount','=',0]])
                         ->orWhere([['worker','=',0],['master','>',0],['driver_amount','>',0]])
                         ->orWhere([['worker','>',0],['master','=',0],['driver_amount','>',0]]);
+
                 });
             }
         }

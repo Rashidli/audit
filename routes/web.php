@@ -94,6 +94,6 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/edit_report/{order}', [ReportController::class, 'edit'])->name('report_edit');
     Route::get('/report_export',[ReportController::class,'export'])->name('report_export');
 
-    Route::get('/export_excel_new',[ReportController::class,'export_excel_new'])->name('export_excel_new');
+//    Route::get('/export_excel_new',[ReportController::class,'export_excel_new'])->name('export_excel_new');
 
 });

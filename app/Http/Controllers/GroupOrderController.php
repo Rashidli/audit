@@ -276,8 +276,9 @@ class GroupOrderController extends Controller
             }else{
                 $data['satisfied_thick'] = $request->satisfied_thick;
             }
-
-            $data['auditor_name'] = auth()->user()->name;
+            if(auth()->user()->name !== 'Admin'){
+                $data['auditor_name'] = auth()->user()->name;
+            }
 
             $order->update($data);
 
@@ -291,7 +292,7 @@ class GroupOrderController extends Controller
                 DB::table('order_question')->insert($answers_list);
             }
 
-//            DB::table('master_order')->where('order_id', $order->id)->delete();
+            DB::table('master_order')->where('order_id', $order->id)->delete();
             if($request->masters){
                 $masters_list = [];
                 foreach ($request->masters as $master){
@@ -300,7 +301,7 @@ class GroupOrderController extends Controller
                 DB::table('master_order')->insert($masters_list);
             }
 
-//            DB::table('order_worker')->where('order_id', $order->id)->delete();
+            DB::table('order_worker')->where('order_id', $order->id)->delete();
             if($request->workers){
                 $workers_list = [];
                 foreach ($request->workers as $worker){

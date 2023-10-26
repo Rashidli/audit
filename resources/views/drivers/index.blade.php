@@ -32,7 +32,7 @@
 
                                 <h4 class="card-title">Sürücülər</h4>
 
-                                        <a href="{{route('drivers.create')}}" class="btn btn-primary">+</a>
+{{--                                        <a href="{{route('drivers.create')}}" class="btn btn-primary">+</a>--}}
                                 <br>
                                 <br>
 
@@ -53,7 +53,7 @@
                                                 <th scope="row">{{$driver->number}}</th>
                                                 <td>{{$driver->title}}</td>
                                                 <td>
-                                                    <a href="{{route('drivers.edit',$driver->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
+{{--                                                    <a href="{{route('drivers.edit',$driver->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>--}}
                                                     <form action="{{route('drivers.destroy', $driver->id)}}" method="post" style="display: inline-block">
                                                         {{ method_field('DELETE') }}
                                                         @csrf

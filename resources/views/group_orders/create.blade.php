@@ -280,7 +280,7 @@
                                 <div class="row">
                                     <div class="col-4 col-md-4 col-lg-4">
                                         <div class="mb-3">
-                                            <label class="col-form-label">Müştəri razıdır?</label>
+                                            <label class="col-form-label">Hər şey qaydasındadır</label>
                                         </div>
                                     </div>
                                     <div class="col-1 col-md-1 col-lg-1">

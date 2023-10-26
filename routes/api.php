@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WorkerApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Worker;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/insert_excel',[OrderController::class,'import_excel']);
+
+Route::get('/workers', [WorkerApiController::class, 'index']);
+Route::get('/worker/{id}',[WorkerApiController::class,'show']);
