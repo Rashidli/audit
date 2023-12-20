@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_question', function (Blueprint $table) {
+        if(!Schema::hasTable('order_question')){
+            Schema::create('order_question', function (Blueprint $table) {
 
-            $table->id();
-            $table->boolean('answer');
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('question_id');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->timestamps();
+                $table->id();
+                $table->boolean('answer');
+                $table->unsignedBigInteger('order_id');
+                $table->unsignedBigInteger('question_id');
+                $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+                $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+                $table->timestamps();
 
-        });
+            });
+        }
     }
 
     /**

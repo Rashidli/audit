@@ -40,6 +40,15 @@
                                 </div>
                             </div>
 
+                            @if($order->service_type == 'Evakuasiya')
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="mb-3">
+                                        <label class="col-form-label">Natamam yoxlama</label>
+                                        <input type="checkbox" {{$order->is_completed_evacuation == true ? 'checked' : ''}}  name="is_completed_evacuation" >
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Telefon 2</label>
@@ -134,12 +143,26 @@
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="row">
+{{--                                    <div class="col-10 col-md-10 col-lg-10">--}}
+{{--                                        <div class="mb-3">--}}
+{{--                                            <label class="col-form-label">Operator</label>--}}
+{{--                                            <input value="{{$order->operator}}" class="form-control" type="text">--}}
+{{--                                            @if($errors->first('operator')) <small class="form-text text-danger">{{$errors->first('operator')}}</small> @endif--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <div class="col-10 col-md-10 col-lg-10">
                                         <div class="mb-3">
-                                            <label class="col-form-label">Operator</label>
-                                            <input value="{{$order->operator}}" class="form-control" type="text">
-                                            @if($errors->first('operator')) <small class="form-text text-danger">{{$errors->first('operator')}}</small> @endif
+                                            <label class=" col-form-label">Operator</label>
+                                            <select class="js-example-basic-single1 form-control" style="width: 100%" name="operator" >
+                                                <option selected disabled >----</option>
+
+                                                @foreach($operators as $operator)
+                                                    <option value="{{$operator->title}}" {{$order->operator == $operator->title ? 'selected' : ''}}>{{$operator->title}}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
+                                        <input disabled value="{{$order->operator}}" class="form-control">
                                     </div>
                                     <div class="col-2 col-md-2 col-lg-2">
                                         <div class="mt-5">
@@ -200,20 +223,22 @@
                                         <div class="col-10 col-md-10 col-lg-10">
                                             <div class="mb-3">
                                                 <label class=" col-form-label">Sürücü seç</label>
-                                                <select class="js-example-basic-single form-control" style="width: 100%" name="driver">
+                                                <select class="js-example-basic-single1 form-control" style="width: 100%" name="driver" id="continent">
                                                     <option selected disabled >----</option>
+
                                                     @foreach($drivers as $driver)
                                                         <option value="{{$driver->title}}" {{$order->driver == $driver->title ? 'selected' : ''}}>{{$driver->title}}</option>
                                                     @endforeach
 
                                                 </select>
                                             </div>
+                                            <input disabled value="{{$order->driver}}" class="form-control">
                                         </div>
 
                                         <div class="col-2 col-md-2 col-lg-2">
                                             <div class="mt-5">
                                                 <div class="form-check mt-4">
-                                                    <input class="form-check-input" type="checkbox" id="my-checkbox"  value="1" name="driver_thick">
+                                                    <input class="form-check-input" type="checkbox" id="my-checkbox"  value="1" name="driver_thick"  {{$order->driver_thick ? 'checked' : ''}}>
                                                     <input type="text" id="custom-input" value="0" name="custom_input_driver" style="display: none;">
                                                 </div>
                                             </div>
@@ -221,6 +246,7 @@
 
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
@@ -367,8 +393,9 @@
                                 @foreach($question_cats as $key => $question_cat)
                                     <div class="tab-pane fade  {{$key == 0 ? 'show active' : ''}}" id="nav-{{$question_cat->id}}" role="tabpanel" aria-labelledby="nav-{{$question_cat->id}}-tab">
                                         <div class="row">
+
                                             @foreach($question_cat->questions as $question)
-                                                @foreach($order->questions as $q)
+                                                @foreach($order->questions()->wherePivot('answer', 0)->get() as $q)
                                                     @if($question->id == $q->id)
                                                         <div class="col-2 col-md-6 col-lg-4">
                                                             <div class="mb-3">
@@ -434,7 +461,6 @@
 
                         </div>
 
-
                     </div>
                     <div class="row">
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4">
@@ -450,3 +476,10 @@
     </div>
 </div>
 @include('includes.footer')
+<script>
+
+    $('.js-example-basic-single1').select2({
+        tags: true
+    });
+
+</script>

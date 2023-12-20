@@ -7,6 +7,7 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupOrderController;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
@@ -40,6 +41,11 @@ Route::get('/link',function (){
     return 'Success';
 });
 
+Route::get('/migrate',function (){
+    \Illuminate\Support\Facades\Artisan::call('migrate');
+    return 'Success';
+});
+
 Route::get('/', [PageController::class,'login'])->name('login');
 Route::get('/register', [PageController::class,'register'])->name('register');
 Route::post('/login_submit',[AuthController::class,'login_submit'])->name('login_submit');
@@ -61,6 +67,8 @@ Route::group(['middleware' =>'auth'], function (){
     Route::resource('question_cats',QuestionCatController::class);
     Route::resource('questions',QuestionController::class);
     Route::resource('drivers',DriverController::class);
+    Route::resource('operators',OperatorController::class);
+    Route::any('/import_operators',[OperatorController::class,'import_operators'])->name('import_operators');
     Route::any('/import_drivers',[DriverController::class,'import_drivers'])->name('import_drivers');
     Route::any('/import_masters',[MasterController::class,'import_masters'])->name('import_masters');
     Route::any('/import_workers',[WorkerController::class,'import_workers'])->name('import_workers');
@@ -93,6 +101,7 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('/report', [ReportController::class, 'index'])->name('report');
     Route::get('/edit_report/{order}', [ReportController::class, 'edit'])->name('report_edit');
     Route::get('/report_export',[ReportController::class,'export'])->name('report_export');
+    Route::delete('/destroy_order',[ReportController::class,'destroy'])->name('report.destroy');
 
 //    Route::get('/export_excel_new',[ReportController::class,'export_excel_new'])->name('export_excel_new');
 

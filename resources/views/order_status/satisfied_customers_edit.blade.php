@@ -16,63 +16,63 @@
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Sifariş nömrəsi</label>
-                                    <input readonly value="{{$order->order_number}}" class="form-control" type="text" name="order_number">
+                                    <input  value="{{$order->order_number}}" class="form-control" type="text" name="order_number">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Sifariş tarixi</label>
-                                    <input readonly value="{{$order->order_date}}" class="form-control" type="text" name="order_date">
+                                    <input  value="{{$order->order_date}}" class="form-control" type="text" name="order_date">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Sifariş id</label>
-                                    <input readonly value="{{$order->order_id}}" class="form-control" type="text" name="order_id">
+                                    <input  value="{{$order->order_id}}" class="form-control" type="text" name="order_id">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Xidmət növü</label>
-                                    <input readonly value="{{$order->service_type}}" class="form-control" type="text" name="service_type">
+                                    <input  value="{{$order->service_type}}" class="form-control" type="text" name="service_type">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Telefon 2</label>
-                                    <input readonly value="{{$order->phone_2}}" class="form-control" type="text" name="phone_2">
+                                    <input  value="{{$order->phone_2}}" class="form-control" type="text" name="phone_2">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Sifariş qeydi</label>
-                                    <input readonly value="{{$order->service_note}}" class="form-control" type="text" name="service_note">
+                                    <input  value="{{$order->service_note}}" class="form-control" type="text" name="service_note">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Zəng tarixi</label>
-                                    <input readonly value="{{$order->call_date}}" class="form-control" type="text" name="call_date">
+                                    <input  value="{{$order->call_date}}" class="form-control" type="text" name="call_date">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label"> Maşın nömrəsi</label>
-                                    <input  readonly class="form-control" value="{{$order->car_number}}" type="text" name="car_number">
+                                    <input   class="form-control" value="{{$order->car_number}}" type="text" name="car_number">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Fəhlə sayı</label>
-                                    <input readonly  class="form-control" value="{{$order->worker_count}}" type="text" name="worker_count">
+                                    <input   class="form-control" value="{{$order->worker_count}}" type="text" name="worker_count">
                                 </div>
                             </div>
 
@@ -80,56 +80,56 @@
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Usta sayı</label>
-                                    <input  readonly class="form-control" value="{{$order->master_count}}" type="text" name="master_count">
+                                    <input   class="form-control" value="{{$order->master_count}}" type="text" name="master_count">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Sürücünün telefon nömrəsi</label>
-                                    <input  readonly class="form-control" value="{{$order->driver_phone}}" type="text" name="driver_phone">
+                                    <input   class="form-control" value="{{$order->driver_phone}}" type="text" name="driver_phone">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Sürücünün qrup rəhbəri</label>
-                                    <input  readonly class="form-control" value="{{$order->driver_group_head}}" type="text" name="driver_group_head">
+                                    <input   class="form-control" value="{{$order->driver_group_head}}" type="text" name="driver_group_head">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Qaraj adı</label>
-                                    <input readonly  class="form-control" type="text" value="{{$order->garage_name}}" name="garage_name">
+                                    <input   class="form-control" type="text" value="{{$order->garage_name}}" name="garage_name">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Sifarişin bitmə tarixi</label>
-                                    <input readonly value="{{$order->order_end_date}}" class="form-control" type="text" name="order_end_date">
+                                    <input  value="{{$order->order_end_date}}" class="form-control" type="text" name="order_end_date">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Müştəri</label>
-                                    <input readonly value="{{$order->customer_name}}" class="form-control" type="text" name="customer_name">
+                                    <input  value="{{$order->customer_name}}" class="form-control" type="text" name="customer_name">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Telefon</label>
-                                    <input readonly value="{{$order->phone}}" class="form-control" type="text" name="phone">
+                                    <input  value="{{$order->phone}}" class="form-control" type="text" name="phone">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Korporativ</label>
-                                    <input readonly value="{{$order->corporate}}" class="form-control" type="text" name="corporate">
+                                    <input  value="{{$order->corporate}}" class="form-control" type="text" name="corporate">
                                 </div>
                             </div>
 
@@ -137,10 +137,17 @@
                                 <div class="row">
                                     <div class="col-10 col-md-10 col-lg-10">
                                         <div class="mb-3">
-                                            <label class="col-form-label">Operator</label>
-                                            <input readonly value="{{$order->operator}}" class="form-control" type="text">
-                                            @if($errors->first('operator')) <small class="form-text text-danger">{{$errors->first('operator')}}</small> @endif
+                                            <label class=" col-form-label">Operator</label>
+                                            <select class="js-example-basic-single1 form-control" style="width: 100%" name="operator" >
+                                                <option selected disabled >----</option>
+
+                                                @foreach($operators as $operator)
+                                                    <option value="{{$operator->title}}" {{$order->operator == $operator->title ? 'selected' : ''}}>{{$operator->title}}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
+                                        <input disabled value="{{$order->operator}}" class="form-control">
                                     </div>
                                     <div class="col-2 col-md-2 col-lg-2">
                                         <div class="mt-5">
@@ -156,21 +163,21 @@
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Sifarişin statusu</label>
-                                    <input readonly value="{{$order->order_status}}" class="form-control" type="text" name="order_status">
+                                    <input  value="{{$order->order_status}}" class="form-control" type="text" name="order_status">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Öz tutma</label>
-                                    <input readonly value="{{$order->oz_tutma}}" class="form-control" type="text" name="oz_tutma">
+                                    <input  value="{{$order->oz_tutma}}" class="form-control" type="text" name="oz_tutma">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Məbləğ</label>
-                                    <input readonly value="{{$order->amount}}" class="form-control" type="text" name="amount">
+                                    <input  value="{{$order->amount}}" class="form-control" type="text" name="amount">
                                 </div>
                             </div>
 
@@ -178,8 +185,17 @@
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-10 col-md-10 col-lg-10">
-                                            <label class="col-form-label">Sürücü</label>
-                                            <input readonly value="{{$order->driver}}" class="form-control" type="text" >
+                                            <div class="mb-3">
+                                                <label class=" col-form-label">Sürücü seç</label>
+                                                <select class="js-example-basic-single1 form-control" style="width: 100%" name="driver">
+                                                    <option selected disabled >----</option>
+                                                    @foreach($drivers as $driver)
+                                                        <option value="{{$driver->title}}" {{$order->driver == $driver->title ? 'selected' : ''}}>{{$driver->title}}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+                                            <input value="{{$order->driver}}" disabled class="form-control">
                                         </div>
 
                                         <div class="col-2 col-md-2 col-lg-2">
@@ -197,70 +213,70 @@
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">İmtina səbəbi</label>
-                                    <input readonly value="{{$order->reason_of_cancel}}" class="form-control" type="text" name="reason_of_cancel">
+                                    <input  value="{{$order->reason_of_cancel}}" class="form-control" type="text" name="reason_of_cancel">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Sürücü məbləği</label>
-                                    <input readonly value="{{$order->driver_amount}}" class="form-control" type="text" name="driver_amount">
+                                    <input  value="{{$order->driver_amount}}" class="form-control" type="text" name="driver_amount">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Usta</label>
-                                    <input readonly value="{{$order->master}}" class="form-control" type="text" name="master">
+                                    <input  value="{{$order->master}}" class="form-control" type="text" name="master">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Fəhlə</label>
-                                    <input readonly value="{{$order->worker}}" class="form-control" type="text" name="worker">
+                                    <input  value="{{$order->worker}}" class="form-control" type="text" name="worker">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Əlavə xidmət</label>
-                                    <input readonly value="{{$order->additional_service}}" class="form-control" type="text" name="additional_service">
+                                    <input  value="{{$order->additional_service}}" class="form-control" type="text" name="additional_service">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Şöbə</label>
-                                    <input readonly value="{{$order->department}}" class="form-control" type="text" name="department">
+                                    <input  value="{{$order->department}}" class="form-control" type="text" name="department">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Məmnuniyyət statusu</label>
-                                    <input readonly value="{{$order->satisfaction_status}}" class="form-control" type="text" name="satisfaction_status">
+                                    <input  value="{{$order->satisfaction_status}}" class="form-control" type="text" name="satisfaction_status">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Ünvan</label>
-                                    <input readonly value="{{$order->address}}" class="form-control" type="text" name="address">
+                                    <input  value="{{$order->address}}" class="form-control" type="text" name="address">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Danışıq müddəti(san)</label>
-                                    <input readonly value="{{$order->speaking_duration}}" class="form-control" type="text" name="speaking_duration">
+                                    <input  value="{{$order->speaking_duration}}" class="form-control" type="text" name="speaking_duration">
                                 </div>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Qeyd</label>
-                                    <input readonly value="{{$order->note}}" class="form-control" type="text" name="note">
+                                    <input  value="{{$order->note}}" class="form-control" type="text" name="note">
                                 </div>
                             </div>
 
@@ -268,7 +284,7 @@
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class=" col-form-label">Auditor</label>
-                                    <input readonly value="{{$order->auditor_name}}" class="form-control" type="text" >
+                                    <input  value="{{$order->auditor_name}}" class="form-control" type="text" >
                                 </div>
                             </div>
 
@@ -398,7 +414,7 @@
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
                                     <label class="col-form-label">Auditor qeyd</label>
-                                    <textarea readonly style="width: 100%"  class="form-control" type="text" name="auditor_note">{{$order->auditor_note}}</textarea>
+                                    <textarea  style="width: 100%"  class="form-control" type="text" name="auditor_note">{{$order->auditor_note}}</textarea>
                                 </div>
                             </div>
 
@@ -447,3 +463,10 @@
 </div>
 
 @include('includes.footer')
+<script>
+
+    $('.js-example-basic-single1').select2({
+        tags: true
+    });
+
+</script>

@@ -48,7 +48,7 @@
                                         <div class="col-10 col-md-10 col-lg-10">
                                             <div class="mb-3">
                                                 <label class=" col-form-label">Sürücü seç</label>
-                                                <select class="js-example-basic-single form-control" style="width: 100%" name="driver">
+                                                <select class="js-example-basic-single1 form-control" style="width: 100%" name="driver">
                                                     <option selected disabled >----</option>
                                                     @foreach($drivers as $driver)
                                                         <option value="{{$driver->title}}">{{$driver->title}}</option>
@@ -84,8 +84,14 @@
                                 <div class="row">
                                     <div class="col-10 col-md-10 col-lg-10">
                                         <div class="mb-3">
-                                            <label class="col-form-label">Operator</label>
-                                            <input  class="form-control" type="text" name="operator">
+                                            <label class=" col-form-label">Operator</label>
+                                            <select class="js-example-basic-single1 form-control" style="width: 100%" name="operator">
+                                                <option selected disabled >----</option>
+                                                @foreach($operators as $operator)
+                                                    <option value="{{$operator->title}}">{{$operator->title}}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-2 col-md-2 col-lg-2">
@@ -96,6 +102,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Natamam yoxlama</label>
+                                    <input type="checkbox"  name="is_completed_evacuation" >
                                 </div>
                             </div>
 
@@ -183,6 +195,7 @@
                                 </div>
 
                             </div>
+
                             <input type="hidden" value="0" name="is_new">
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="mb-3">
@@ -219,3 +232,10 @@
     </div>
 </div>
 @include('includes.footer')
+<script>
+
+    $('.js-example-basic-single1').select2({
+        tags: true
+    });
+
+</script>

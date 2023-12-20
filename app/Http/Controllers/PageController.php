@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Group;
 use App\Models\Master;
+use App\Models\Operator;
 use App\Models\Order;
 use App\Models\Question;
 use App\Models\QuestionCat;
@@ -110,19 +111,18 @@ class PageController extends Controller
 
     public function order_status(Request $request, $auditor_status = null)
     {
-
-        if(isset($auditor_status)){
-
-            $query = Order::whereHas('questions', function($q) use ($auditor_status){
-
-                $q->where('level', $auditor_status)->withTrashed();
-
-            })->where('auditor_status', true);
-
-        }else{
-
-            $query = Order::doesntHave('questions')->where([['auditor_status', true], ['auditor_note', '!=', null], ['satisfied_thick', false]]);
-
+        if (isset($auditor_status)) {
+            $query = Order::with('questions')
+                ->where('auditor_status', true)
+                ->where('is_new', false)
+                ->whereHas('questions', function ($q) use ($auditor_status) {
+                    $q->where('level', $auditor_status)->where('answer', false)->withTrashed();
+                });
+        } else {
+            $query = Order::doesntHave('questions')
+                ->where('auditor_status', true)
+                ->where('auditor_note', '!=', null)
+                ->where('satisfied_thick', false);
         }
 
         $limit = $request->input('limit', 10);
@@ -130,7 +130,6 @@ class PageController extends Controller
         $table = 'orders';
 
         if ($text) {
-
             $query->where(function ($query) use ($text, $table) {
                 $columns = Schema::getColumnListing($table);
 
@@ -138,21 +137,25 @@ class PageController extends Controller
                     $query->orWhere($column, 'LIKE', '%' . $text . '%');
                 }
             });
-
         }
-
         $route =  $auditor_status;
+        $count = $query->count();
 
-        $count = count($query->get());
         $orders = $query->orderBy('id', 'desc')->paginate($limit)->withQueryString();
 
-        return view('order_status.index', compact('orders','route','count'));
-
+        return view('order_status.index', compact('orders', 'route', 'count'));
     }
+
 
     public function satisfied_customers(Request $request)
     {
-        $query = Order::where([['auditor_status', true], ['satisfied_thick', true]]);
+
+        $query = Order::where(function ($query) {
+            $query->whereHas('questions', function ($subQuery) {
+                $subQuery->where('answer', false)->withTrashed();
+            })
+                ->orWhereDoesntHave('questions');
+        })->where([['auditor_status', true], ['satisfied_thick', true]]);
 
         $limit = $request->input('limit', 10);
         $text = $request->input('text');
@@ -203,8 +206,10 @@ class PageController extends Controller
         $masters = Master::withTrashed()->get();
 
         $workers = Worker::withTrashed()->get();
+        $operators = Operator::withTrashed()->get();
+        $drivers = Driver::withTrashed()->get();
 
-        return view('order_status.satisfied_customers_edit', compact('order','masters','workers','question_cats'));
+        return view('order_status.satisfied_customers_edit', compact('order','masters','workers','question_cats','operators','drivers'));
 
     }
 
@@ -242,8 +247,9 @@ class PageController extends Controller
         $workers = Worker::withTrashed()->get();
 
         $drivers = Driver::withTrashed()->get();
+        $operators = Operator::withTrashed()->get();
 
-        return view('order_status.edit', compact('order','masters','workers','question_cats','level_id','drivers'));
+        return view('order_status.edit', compact('order','masters','workers','question_cats','level_id','drivers','operators'));
 
     }
 

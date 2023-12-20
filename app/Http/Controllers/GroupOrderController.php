@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Group;
 use App\Models\Master;
+use App\Models\Operator;
 use App\Models\Order;
 use App\Models\QuestionCat;
 use App\Models\Worker;
@@ -25,8 +26,8 @@ class GroupOrderController extends Controller
 
         $groups = Group::all();
         $drivers = Driver::all();
-
-        return view('group_orders.evakuasiya_create', compact('question_cats','groups','drivers'));
+        $operators = Operator::all();
+        return view('group_orders.evakuasiya_create', compact('question_cats','groups','drivers','operators'));
 
     }
 
@@ -41,17 +42,19 @@ class GroupOrderController extends Controller
         $workers = Worker::all();
         $groups = Group::all();
         $drivers = Driver::all();
+        $operators = Operator::all();
 
-        return view('group_orders.create', compact('question_cats','masters','workers','groups','drivers'));
+        return view('group_orders.create', compact('question_cats','masters','workers','groups','drivers','operators'));
 
     }
 
     public function auditor_store_order(Request $request)
     {
+
         DB::beginTransaction();
         try {
 
-            $data = $request->except(['worker','master','driver_amount','masters', 'workers', 'auditor_name','auditor_images','answers','worker_thick','master_thick','worker_thick','operator_thick','custom_input_operator','custom_input_worker','custom_input_master','custom_input_driver','satisfied_thick','custom_input_satisfied']);
+            $data = $request->except(['worker','master','driver_amount','masters', 'workers', 'auditor_name','auditor_images','answers','worker_thick','master_thick','worker_thick','operator_thick','custom_input_operator','custom_input_worker','custom_input_master','custom_input_driver','satisfied_thick','custom_input_satisfied','is_completed_evacuation']);
 
             if(empty($request->worker)){
                 $data['worker'] = 0;
@@ -69,6 +72,7 @@ class GroupOrderController extends Controller
                 $data['driver_amount'] = $request->driver_amount;
             }
 
+            $data['is_completed_evacuation'] = isset($request->is_completed_evacuation);
 
             if(empty($request->worker_thick)){
                 $data['worker_thick'] = $request->custom_input_worker;
@@ -246,7 +250,7 @@ class GroupOrderController extends Controller
 
         try {
 
-            $data = $request->except(['masters', 'workers', 'auditor_name','auditor_images','answers','worker_thick','master_thick','worker_thick','operator_thick','custom_input_operator','custom_input_worker','custom_input_master','custom_input_driver','satisfied_thick','custom_input_satisfied']);
+            $data = $request->except(['masters', 'workers', 'auditor_name','auditor_images','answers','worker_thick','master_thick','worker_thick','operator_thick','custom_input_operator','custom_input_worker','custom_input_master','custom_input_driver','satisfied_thick','custom_input_satisfied','is_completed_evacuation']);
 
             if(empty($request->worker_thick)){
                 $data['worker_thick'] = $request->custom_input_worker;
@@ -265,6 +269,8 @@ class GroupOrderController extends Controller
             }else{
                 $data['driver_thick'] = $request->driver_thick;
             }
+
+            $data['is_completed_evacuation'] = isset($request->is_completed_evacuation);
 
             if(empty($request->operator_thick)){
                 $data['operator_thick'] = $request->custom_input_operator;

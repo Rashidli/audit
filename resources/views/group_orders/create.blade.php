@@ -48,7 +48,7 @@
                                         <div class="col-10 col-md-10 col-lg-10">
                                             <div class="mb-3">
                                                 <label class=" col-form-label">Sürücü seç</label>
-                                                <select class="js-example-basic-single form-control" style="width: 100%" name="driver">
+                                                <select class="js-example-basic-single1 form-control" style="width: 100%" name="driver">
                                                     <option selected disabled >----</option>
                                                     @foreach($drivers as $driver)
                                                         <option value="{{$driver->title}}">{{$driver->title}}</option>
@@ -56,6 +56,7 @@
 
                                                 </select>
                                             </div>
+
                                         </div>
 
                                         <div class="col-2 col-md-2 col-lg-2">
@@ -104,8 +105,14 @@
                                 <div class="row">
                                     <div class="col-10 col-md-10 col-lg-10">
                                         <div class="mb-3">
-                                            <label class="col-form-label">Operator</label>
-                                            <input  class="form-control" type="text" name="operator">
+                                            <label class=" col-form-label">Operator</label>
+                                            <select class="js-example-basic-single1 form-control" style="width: 100%" name="operator">
+                                                <option selected disabled >----</option>
+                                                @foreach($operators as $operator)
+                                                    <option value="{{$operator->title}}">{{$operator->title}}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-2 col-md-2 col-lg-2">
@@ -330,3 +337,10 @@
     </div>
 </div>
 @include('includes.footer')
+<script>
+
+    $('.js-example-basic-single1').select2({
+        tags: true
+    });
+
+</script>

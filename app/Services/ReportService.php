@@ -7,7 +7,6 @@ class ReportService{
 
     public function filter($request)
     {
-
         $limit = $request->input('limit', 10);
         $mixin_single = $request->input('mixin_single');
         $order_status = $request->input('order_status');
@@ -18,57 +17,93 @@ class ReportService{
         $end_date = $request->input('end_date');
         $table = 'orders';
 
-        $query =Order::where('auditor_status', true)->where('is_new', false);
+        $query = Order::with('questions')
+            ->where('auditor_status', true)
+            ->where('is_new', false)
+            ->where(function ($query) {
+                $query->whereHas('questions', function ($subQuery) {
+                    $subQuery->where('answer', false)->withTrashed();
+                })
+                    ->orWhereDoesntHave('questions');
+            });
 
-        if($start_date || $end_date){
 
-            $query->where('updated_at', '>=', $start_date .' 00:00:00')->where('updated_at','<=', $end_date .' 23:59:59');
-
+        if ($start_date || $end_date) {
+            $query->whereBetween('updated_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
         }
 
-        if($mixin_single){
-            if($mixin_single == 'single'){
-
-                $query->where(function ($q){
-                    $q
-                        ->orWhere([['worker','=',0],['master','=',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','>',0],['master','=',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','=',0],['master','>',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','=',0],['master','=',0],['driver_amount','>',0]]);
+        if ($mixin_single) {
+            if ($mixin_single == 'single') {
+                $query->where(function ($q) {
+                    $q->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '>', 0]
+                    ]);
                 });
-
-            }elseif ($mixin_single == 'mixin'){
-                $query->where(function ($q){
-
-                    $q
-                        ->orWhere([['worker','>',0],['master','>',0],['driver_amount','>',0]])
-                        ->orWhere([['worker','>',0],['master','>',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','=',0],['master','>',0],['driver_amount','>',0]])
-                        ->orWhere([['worker','>',0],['master','=',0],['driver_amount','>',0]]);
+            } elseif ($mixin_single == 'mixin') {
+                $query->where(function ($q) {
+                    $q->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '>', 0]
+                    ])->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '>', 0]
+                    ])->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '>', 0]
+                    ]);
                 });
             }
         }
 
-        if($auditor_title){
+        if ($auditor_title) {
             $query->where('auditor_name', $auditor_title);
         }
 
-        if($order_status){
-            $query->whereHas('questions', function($q) use ($order_status){
 
-                $q->where('level', $order_status);
+        if ($order_status) {
+            if ($order_status == 4) {
+                $query->where('satisfied_thick', true);
+            }elseif ($order_status == 5){
 
-            });
+                $query->doesntHave('questions')
+                    ->where('auditor_status', true)
+                    ->where('auditor_note', '!=', null)
+                    ->where('satisfied_thick', false);
+            } else {
+                $query->whereHas('questions', function ($q) use ($order_status) {
+                    $q->where('level', $order_status)->where('answer', false)->withTrashed();
+                });
+            }
         }
 
-        if($group_id){
-            $query->whereHas('groups',function($q) use ($group_id){
-                $q->where('groups.id',$group_id);
+        if ($group_id) {
+            $query->whereHas('groups', function ($q) use ($group_id) {
+                $q->where('groups.id', $group_id);
             });
         }
 
         if ($text) {
-
             $query->where(function ($query) use ($text, $table) {
                 $columns = Schema::getColumnListing($table);
 
@@ -76,15 +111,15 @@ class ReportService{
                     $query->orWhere($column, 'LIKE', '%' . $text . '%');
                 }
             });
-
         }
 
-        $count = count($query->get());
+        $count = $query->count();
+
         $orders = $query->orderBy('id', 'desc')->paginate($limit)->withQueryString();
 
         return ['items' => $orders, 'count' => $count];
-
     }
+
 
     public function forExcel($request)
     {
@@ -98,59 +133,92 @@ class ReportService{
         $end_date = $request->end_date;
         $table = 'orders';
 
-        $query =Order::where('auditor_status', true)->where('is_new', false)->with('masters', 'workers', 'questions');
+        $query = Order::with('questions')
+            ->where('auditor_status', true)
+            ->where('is_new', false)
+            ->where(function ($query) {
+                $query->whereHas('questions', function ($subQuery) {
+                    $subQuery->where('answer', false)->withTrashed();
+                })
+                    ->orWhereDoesntHave('questions');
+            });
 
-        if($start_date || $end_date){
 
-            $query->where('updated_at', '>=', $start_date .' 00:00:00')->where('updated_at','<=', $end_date .' 23:59:59');
-
+        if ($start_date || $end_date) {
+            $query->whereBetween('updated_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
         }
 
-        if($mixin_single){
-            if($mixin_single == 'single'){
-
-                $query->where(function ($q){
-                    $q
-                        ->orWhere([['worker','=',0],['master','=',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','>',0],['master','=',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','=',0],['master','>',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','=',0],['master','=',0],['driver_amount','>',0]]);
-
+        if ($mixin_single) {
+            if ($mixin_single == 'single') {
+                $query->where(function ($q) {
+                    $q->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '>', 0]
+                    ]);
                 });
-
-            }elseif ($mixin_single == 'mixin'){
-                $query->where(function ($q){
-
-                    $q
-                        ->orWhere([['worker','>',0],['master','>',0],['driver_amount','>',0]])
-                        ->orWhere([['worker','>',0],['master','>',0],['driver_amount','=',0]])
-                        ->orWhere([['worker','=',0],['master','>',0],['driver_amount','>',0]])
-                        ->orWhere([['worker','>',0],['master','=',0],['driver_amount','>',0]]);
-
+            } elseif ($mixin_single == 'mixin') {
+                $query->where(function ($q) {
+                    $q->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '>', 0]
+                    ])->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '=', 0]
+                    ])->orWhere([
+                        ['worker', '=', 0],
+                        ['master', '>', 0],
+                        ['driver_amount', '>', 0]
+                    ])->orWhere([
+                        ['worker', '>', 0],
+                        ['master', '=', 0],
+                        ['driver_amount', '>', 0]
+                    ]);
                 });
             }
         }
 
-        if($auditor_title){
+        if ($auditor_title) {
             $query->where('auditor_name', $auditor_title);
         }
 
-        if($order_status){
-            $query->whereHas('questions', function($q) use ($order_status){
+        if ($order_status) {
+            if ($order_status == 4) {
+                $query->where('satisfied_thick', true);
+            }elseif ($order_status == 5){
 
-                $q->where('level', $order_status);
-
-            });
+                $query->doesntHave('questions')
+                    ->where('auditor_status', true)
+                    ->where('auditor_note', '!=', null)
+                    ->where('satisfied_thick', false);
+            } else {
+                $query->whereHas('questions', function ($q) use ($order_status) {
+                    $q->where('level', $order_status)->where('answer', false)->withTrashed();
+                });
+            }
         }
 
-        if($group_id){
-            $query->whereHas('groups',function($q) use ($group_id){
-                $q->where('groups.id',$group_id);
+        if ($group_id) {
+            $query->whereHas('groups', function ($q) use ($group_id) {
+                $q->where('groups.id', $group_id);
             });
         }
 
         if ($text) {
-
             $query->where(function ($query) use ($text, $table) {
                 $columns = Schema::getColumnListing($table);
 
@@ -158,7 +226,6 @@ class ReportService{
                     $query->orWhere($column, 'LIKE', '%' . $text . '%');
                 }
             });
-
         }
 
 

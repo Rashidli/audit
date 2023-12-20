@@ -208,6 +208,7 @@ X
                                 <span>Tənzimləmələr</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{route('operators.index')}}">Operatorlar</a></li>
                                 <li><a href="{{route('masters.index')}}">Ustalar</a></li>
                                 <li><a href="{{route('workers.index')}}">Köməkçilər</a></li>
                                 <li><a href="{{route('drivers.index')}}">Sürücülər</a></li>

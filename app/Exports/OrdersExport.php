@@ -61,6 +61,7 @@ class OrdersExport implements FromCollection,WithHeadings
                 'Service note' => $order->service_note,
                 'Customer' => $order->customer_name,
                 'Order end date' => $order->order_end_date,
+                'Satisfied thick' => $order->satisfied_thick == 1 ? "Müştəri razıdı" : '',
             ];
         }
 
@@ -94,6 +95,7 @@ class OrdersExport implements FromCollection,WithHeadings
             'Sifariş qeydi',
             'Müştəri',
             'Sifarişin bitmə tarixi',
+            'Müştəri razıdı'
         ];
     }
 

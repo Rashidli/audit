@@ -55,6 +55,8 @@
                                                     <option value="1" {{ request()->order_status == '1' ? 'selected' : '' }}>Yüngül</option>
                                                     <option value="2" {{ request()->order_status == '2' ? 'selected' : '' }}>Orta</option>
                                                     <option value="3" {{ request()->order_status == '3' ? 'selected' : '' }}>Ağır</option>
+                                                    <option value="5" {{ request()->order_status == '5' ? 'selected' : '' }}>Açıq</option>
+                                                    <option value="4" {{ request()->order_status == '4' ? 'selected' : '' }}>Müştəri razı</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -131,7 +133,14 @@
                                                 <td>{{$order->order_end_date}}</td>
                                                 <td>{{$order->auditor_name}}</td>
 
-                                                <td><a href="{{route('report_edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a></td>
+                                                <td>
+                                                    <a href="{{route('report_edit',$order->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
+                                                    <form action="{{route('orders.destroy', $order->id)}}" method="post" style="display: inline-block">
+                                                        {{ method_field('DELETE') }}
+                                                        @csrf
+                                                        <button  type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
 
                                             </tr>
 

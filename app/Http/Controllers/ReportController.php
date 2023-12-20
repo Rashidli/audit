@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Group;
 use App\Models\Master;
+use App\Models\Operator;
 use App\Models\Order;
 use App\Models\QuestionCat;
 use App\Models\User;
@@ -43,8 +44,9 @@ class ReportController extends Controller
         $workers = Worker::withTrashed()->get();
 
         $drivers = Driver::withTrashed()->get();
+        $operators = Operator::withTrashed()->get();
 
-        return view('reports.edit', compact('order','masters','workers','question_cats','drivers'));
+        return view('reports.edit', compact('order','masters','workers','question_cats','drivers','operators'));
 
     }
 
@@ -70,6 +72,15 @@ class ReportController extends Controller
         $orders = $filter->forExcel($request);
 
         return Excel::download(new OrdersExport($orders), 'orders.xlsx');
+
+    }
+
+    public function destroy(Order $order)
+    {
+
+        $order->delete();
+
+        return redirect()->back()->with('message', 'Məlumat silindi.');
 
     }
 
