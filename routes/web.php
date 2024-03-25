@@ -11,6 +11,9 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PlanOrderController;
+use App\Http\Controllers\PlanQuestionController;
+use App\Http\Controllers\PlanReportController;
 use App\Http\Controllers\QuestionCatController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReportController;
@@ -68,6 +71,10 @@ Route::group(['middleware' =>'auth'], function (){
     Route::resource('questions',QuestionController::class);
     Route::resource('drivers',DriverController::class);
     Route::resource('operators',OperatorController::class);
+    Route::resource('plan_questions',PlanQuestionController::class);
+    Route::resource('plan_orders',PlanOrderController::class);
+    Route::resource('plan_reports',PlanReportController::class);
+
     Route::any('/import_operators',[OperatorController::class,'import_operators'])->name('import_operators');
     Route::any('/import_drivers',[DriverController::class,'import_drivers'])->name('import_drivers');
     Route::any('/import_masters',[MasterController::class,'import_masters'])->name('import_masters');

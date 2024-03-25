@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\Order;
+use App\Models\PlanOrder;
 use Illuminate\Support\Facades\Schema;
 
 class ReportService{
@@ -91,9 +92,11 @@ class ReportService{
                     ->where('auditor_note', '!=', null)
                     ->where('satisfied_thick', false);
             } else {
+
                 $query->whereHas('questions', function ($q) use ($order_status) {
                     $q->where('level', $order_status)->where('answer', false)->withTrashed();
                 });
+
             }
         }
 
@@ -102,6 +105,38 @@ class ReportService{
                 $q->where('groups.id', $group_id);
             });
         }
+
+        if ($text) {
+            $query->where(function ($query) use ($text, $table) {
+                $columns = Schema::getColumnListing($table);
+
+                foreach ($columns as $column) {
+                    $query->orWhere($column, 'LIKE', '%' . $text . '%');
+                }
+            });
+        }
+
+        $count = $query->count();
+
+        $orders = $query->orderBy('id', 'desc')->paginate($limit)->withQueryString();
+
+        return ['items' => $orders, 'count' => $count];
+    }
+
+    public function plan_filter($request)
+    {
+        $limit = $request->input('limit', 10);
+        $text = $request->input('text');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $table = 'plan_orders';
+
+        $query = PlanOrder::with('planQuestions');
+
+        if ($start_date || $end_date) {
+            $query->whereBetween('updated_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
+        }
+
 
         if ($text) {
             $query->where(function ($query) use ($text, $table) {
@@ -205,6 +240,7 @@ class ReportService{
                     ->where('auditor_status', true)
                     ->where('auditor_note', '!=', null)
                     ->where('satisfied_thick', false);
+
             } else {
                 $query->whereHas('questions', function ($q) use ($order_status) {
                     $q->where('level', $order_status)->where('answer', false)->withTrashed();

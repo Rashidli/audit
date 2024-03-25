@@ -214,6 +214,7 @@ X
                                 <li><a href="{{route('drivers.index')}}">Sürücülər</a></li>
                                 <li><a href="{{route('question_cats.index')}}">Sual kateqoriyaları</a></li>
                                 <li><a href="{{route('questions.index')}}">Suallar</a></li>
+                                <li><a href="{{route('plan_questions.index')}}">Proseslərin Sualları</a></li>
                             </ul>
                         </li>
                     @endif
@@ -221,6 +222,18 @@ X
                     @if(Auth::user()->hasRole('admin'))
                         <li>
                             <a href="{{route('report')}}"><i class="ri-layout-3-line"></i><span>Hesabatlar</span></a>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('auditor'))
+                        <li>
+                            <a href="{{route('plan_orders.index')}}"><i class="ri-layout-3-line"></i><span>Planlı yoxlama</span></a>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->hasRole('admin'))
+                        <li>
+                            <a href="{{route('plan_reports.index')}}"><i class="ri-layout-3-line"></i><span>Planlı hesabat</span></a>
                         </li>
                     @endif
 

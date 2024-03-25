@@ -70,8 +70,9 @@ class ReportController extends Controller
         $filter = new ReportService();
 
         $orders = $filter->forExcel($request);
+        $order_status = $request->order_status;
 
-        return Excel::download(new OrdersExport($orders), 'orders.xlsx');
+        return Excel::download(new OrdersExport($orders,$order_status), 'orders.xlsx');
 
     }
 

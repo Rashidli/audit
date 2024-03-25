@@ -18,12 +18,13 @@ class OrdersExport implements FromCollection,WithHeadings
     use Exportable;
 
     private $orders;
+    private $order_status;
 
-    public function __construct($orders)
+    public function __construct($orders,$order_status = null)
     {
         $this->orders = $orders;
+        $this->order_status = $order_status;
     }
-
 
     public function collection()
     {
@@ -35,7 +36,7 @@ class OrdersExport implements FromCollection,WithHeadings
         foreach ($orders as $order) {
             $masterNames = $order->masters->pluck('title')->implode(', ');
             $workerNames = $order->workers->pluck('title')->implode(', ');
-            $questionNames = $order->questions->pluck('title')->implode(', ');
+            $questionNames = $order->questions->where('level', $this->order_status)->pluck('title')->implode(', ');
 
             $data[] = [
                 '#' => $order->order_number,
@@ -62,6 +63,7 @@ class OrdersExport implements FromCollection,WithHeadings
                 'Customer' => $order->customer_name,
                 'Order end date' => $order->order_end_date,
                 'Satisfied thick' => $order->satisfied_thick == 1 ? "Müştəri razıdı" : '',
+                'Date' => $order->created_at,
             ];
         }
 
@@ -95,7 +97,8 @@ class OrdersExport implements FromCollection,WithHeadings
             'Sifariş qeydi',
             'Müştəri',
             'Sifarişin bitmə tarixi',
-            'Müştəri razıdı'
+            'Müştəri razıdı',
+            'Tarix'
         ];
     }
 
